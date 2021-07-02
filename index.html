@@ -202,27 +202,28 @@
         <br />
         <section class="w-7/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl ">
           <div id="searh-bar" class="">
-            <form action="submit" class="py-2">
-              <label for="input" class="font-bold text-2xl">Search Crypto</label><br/>
-              <input type="text" placeholder="ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
+            <form class="py-2">
+              <label  for="input" class="font-bold text-2xl">Search Crypto</label><br/>
+              <input id="input-area" type="text" placeholder=" ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
               <button id="seach-btn" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400">Search</button>
             </form>
           </div>
           <div id="data-container" class="flex justify-between">
           <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 rounded">
-            <p>Ranking: #1</p>
-            <p id="status">Price: $34,5582.25</p>
-            <p>Market Cap: $62,477,75,67,175.68</p>
-            <p>Price Change 24hr:</p>
-            <p>Price Change 1hr:</p>
-            <p>Price Change 7 Day:</p>
-            <p>Current Supply:</p>
-            <p>Total Supply</p>
-            <p>Twitter followers: 414355</p>
-            <p>Current Supply:</p>
-            <p>Total Supply</p>
-            <p>Twitter followers: 414355</p>
+            <p id="logo"></p>
+            <p id="current-supply" >current supply</p>
+            <p id="current-price">Price: $34,5582.25</p>
+            <p id="price-chng-24">Price Change 24hr:</p>
+            <p id="price-chng-1">Price Change 1hr:</p>
+            <p id="day-high">Day high: $5</p>
+            <p id="day-low">Day Low: $5</p>
+            <p></p>
+            <p id="volume">Volume:</p>
+            <p id="daily-volume">Daily Volume</p>
+            <p id="market-cap">Market Cap: $62,477,75,67,175.68</p>
+            <p id="twitter-count"> Twitter followers: 414355</p>
           </div>
+          <!-- news feed for search area -->
           <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4">
               <h2 class="mb-4 font-bold ">Top News on Bitcoin</h2>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga ad modi nisi. Mollitia omnis, commodi ipsam rerum ratione alias, aspernatur fugiat asperiores cum ut, debitis voluptates quos consequatur sint error.
@@ -231,6 +232,7 @@
         </section>
       </section>
       <br />
+      <!-- twitter social feed block -->
       <span class="font-bold text-3xl pl-4 text-blue-800"
         >Bitcoin Twitter Feed</span
       >
