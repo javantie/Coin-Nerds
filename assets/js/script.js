@@ -25,18 +25,15 @@ fetch(API_Base + API_Key)
   })
   .then(function (data) {
     console.log(data);
-    currentPriceEl.textContent = "PRICE: " + data.DISPLAY.BTC.USD.PRICE;
-    marketCapEl.textContent = "MARKET CAP: " + data.DISPLAY.BTC.USD.MKTCAP;
-    priceChange24El.textContent =
-      "PRICE CHANGE 24-HR: " + data.DISPLAY.BTC.USD.CHANGEPCT24HOUR + "%";
-    priceChange1El.textContent =
-      "PRICE CHANGE 1-HR " + data.DISPLAY.BTC.USD.CHANGEPCTHOUR + "%";
-    volumeEl.textContent = "VOLUME: " + data.DISPLAY.BTC.USD.VOLUMEDAYTO;
-    dailyvolumeEl.textContent =
-      "DAILY VOLUME " + data.DISPLAY.BTC.USD.VOLUMEDAYTO;
-    openPriceEl.textContent = "OPEN PRICE: " + data.DISPLAY.BTC.USD.OPENDAY;
-    dayHighEl.textContent = "DAILY HIGH: " + data.DISPLAY.BTC.USD.HIGHDAY;
-    dayLowEl.textContent = "DAILY LOW : " + data.DISPLAY.BTC.USD.LOWDAY;
+    currentPriceEl.textContent = data.DISPLAY.BTC.USD.PRICE;
+    marketCapEl.textContent = data.DISPLAY.BTC.USD.MKTCAP;
+    priceChange24El.textContent = data.DISPLAY.BTC.USD.CHANGEPCT24HOUR + "%";
+    priceChange1El.textContent = data.DISPLAY.BTC.USD.CHANGEPCTHOUR + "%";
+    volumeEl.textContent =  data.DISPLAY.BTC.USD.VOLUMEDAYTO;
+    dailyvolumeEl.textContent = data.DISPLAY.BTC.USD.VOLUMEDAYTO;
+    openPriceEl.textContent = data.DISPLAY.BTC.USD.OPENDAY;
+    dayHighEl.textContent = data.DISPLAY.BTC.USD.HIGHDAY;
+    dayLowEl.textContent = data.DISPLAY.BTC.USD.LOWDAY;
     var img = document.createElement("img");
     img.setAttribute("src", API_Base + "/media/37746238/eth.png");
     logoDisplayEl.append(img);
