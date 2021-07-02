@@ -38,30 +38,40 @@ var CryptoCompareAPIKey = "47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a
  
  function fetchCoinTwitterFollowers(coinId){
   var apiURL = `https://min-api.cryptocompare.com/data/social/coin/latest?coinId=${coinId}&apikey=${CryptoCompareAPIKey}`
-  console.log(1, apiURL)
+ 
   fetch(apiURL)
   .then(function (response) {
-    console.log(2, response)
+    
     return response.json();
   })
   .then(function (data) {
-    console.log(3, data);
+   
      return data;
   });
 }
-
+/******************************************************************
+ * Funtion : convertToUSDollars(number)
+ * Description: 
+ *  1. Use number passed in as a parameter and returns a value 
+ *     formated as of US Dollars
+ *****************************************************************/
 var convertToUSDollars = function(number){
   var options = {
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 2
   }
-  
   return number.toLocaleString("en-US", options);
 }
+/******************************************************************
+ * Funtion : convertToPrecent(number)
+ * Description: 
+ *  1. Use number passed in as a parameter and returns a value 
+ *     formated as a precentage of 2 places.   
+ *****************************************************************/
 
-var convertToPrecent = function(decimal){
-  return(parseFloat(decimal).toFixed(2)+"%");
+var convertToPrecent = function(number){
+  return(parseFloat(number).toFixed(2)+"%");
 }
 
 /***************************************************************************************************
@@ -72,7 +82,7 @@ var convertToPrecent = function(decimal){
  *        3. Display section on the page
  **********************************************************************************************/
 var  buildTopFiveSection = function(data) {
-  console.log(data)
+
   for(var i=0; i<5; i++){
     var coinId = data.Data[i].CoinInfo.Id;
     var tickerName = data.Data[i].CoinInfo.Name;
@@ -81,10 +91,8 @@ var  buildTopFiveSection = function(data) {
     var change24HourPct = data.Data[i].RAW.USD.CHANGEPCT24HOUR;
     var changeHourPct = data.Data[i].RAW.USD.CHANGEPCTHOUR;
 
-    var twitterFeedData = fetchCoinTwitterFollowers(coinId);
+    //var twitterFeedData = fetchCoinTwitterFollowers(coinId);
 
-    console.log(price, tickerName, toSymbol, change24HourPct, changeHourPct)
-    
     var cryptoCard = 
         `
           <div class="crypto-card w-56 shadow rounded bg-gray-50 rounded-md shadow-lg">
@@ -96,7 +104,7 @@ var  buildTopFiveSection = function(data) {
               <p><span class = "label">24-HR Price Change:</span> ${convertToPrecent(change24HourPct)}</p>
               <p><span class = "label">1-HR Price Change:</span> ${convertToPrecent(changeHourPct)}</p>
               <p><span class = "label">Twitter followers:</span> 414355</p>
-              <p><span class = "label">Sentiment:</span> Bullish</p>
+              <p><span class = "label">Sentiment:</span> Sentiment</p>
             </div>
          </div>
         `
