@@ -18,7 +18,7 @@ var API_Base =
 var API_Key =
   "&api_key=47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 
-///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----
+///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----/////
 fetch(API_Base + API_Key)
   .then(function (response) {
     return response.json();
@@ -40,9 +40,8 @@ fetch(API_Base + API_Key)
     var img = document.createElement("img");
     img.setAttribute("src", API_Base + "/media/37746238/eth.png");
     logoDisplayEl.append(img);
-    console.log(img);
 
-    //button for event
+////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
     searchButtonEl.addEventListener("click", function (event) {
       var tick = searchInput.value;
       event.preventDefault();
@@ -50,15 +49,44 @@ fetch(API_Base + API_Key)
         return;
       } else {
         //getSearchData();
-        console.log("Done Search")
+        console.log("Done Search");
       }
     });
   });
 
+  /////////---------CODE FOR LOADING THE NEWS ON CRYPTO------///////
+fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data.Data[5]);
+
+    var newsTitleEl = document.getElementById("news-title");
+    var newsImgEl = document.getElementById("news-img");
+    var newsTxtEl = document.getElementById("news-txt");
+    var category = document.getElementById("category");
+    newsImgEl.setAttribute("src", data.Data[9].imageurl);
+    newsImgEl.setAttribute("class", "rounded h-32 w-80");
+
+    newsTitleEl.textContent = data.Data[9].title;
+    newsTxtEl.textContent = data.Data[9].body;
+    category.textContent = data.Data[9].categories;
+  });
 
 
+  fetch("https://api.coinpaprika.com/v1/coins/btc-bitcoin")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data);
 
-//FUNCTION FOR GETTING DATA AFTER SEARCH
+  })
+
+
+//***********----------FUNCTION FOR GETTING DATA AFTER SEARCH-----------*************//
+
 // var getSearchData = function () {
 //   //dataContainerEl.innerHTML = "";
 //   var tick = searchInput.value;
@@ -95,11 +123,7 @@ fetch(API_Base + API_Key)
 
 
 
-
-
-
-
-
+//**************LIST OF API'S THAT CAN POSSIBLY BE USED*************//
 
 // //Coin Pakrika API #2
 
