@@ -36,17 +36,33 @@ var CryptoCompareAPIKey = "47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a
     //  console.log(data);
     // });
  
-var fetchCoinTwitterFollowers = function(coinId){
+ function fetchCoinTwitterFollowers(coinId){
   var apiURL = `https://min-api.cryptocompare.com/data/social/coin/latest?coinId=${coinId}&apikey=${CryptoCompareAPIKey}`
+  console.log(1, apiURL)
   fetch(apiURL)
   .then(function (response) {
+    console.log(2, response)
     return response.json();
   })
   .then(function (data) {
+    console.log(3, data);
      return data;
   });
 }
 
+var convertToUSDollars = function(number){
+  var options = {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2
+  }
+  
+  return number.toLocaleString("en-US", options);
+}
+
+var convertToPrecent = function(decimal){
+  return(parseFloat(decimal).toFixed(2)+"%");
+}
 
 /***************************************************************************************************
  *  Function : buildTopFiveSection(data)
@@ -55,19 +71,20 @@ var fetchCoinTwitterFollowers = function(coinId){
  *        2. Loop through the array 5 times to retrieve relevant data to build out the top 5 section
  *        3. Display section on the page
  **********************************************************************************************/
-var buildTopFiveSection = function (data) {
+var  buildTopFiveSection = function(data) {
   console.log(data)
   for(var i=0; i<5; i++){
     var coinId = data.Data[i].CoinInfo.Id;
     var tickerName = data.Data[i].CoinInfo.Name;
     var toSymbol = data.Data[i].RAW.USD.TOSYMBOL;
-    var price = data.Data[i].DISPLAY.USD.PRICE;
+    var price = data.Data[i].RAW.USD.PRICE;
     var change24HourPct = data.Data[i].RAW.USD.CHANGEPCT24HOUR;
     var changeHourPct = data.Data[i].RAW.USD.CHANGEPCTHOUR;
- 
 
+    var twitterFeedData = fetchCoinTwitterFollowers(coinId);
 
     console.log(price, tickerName, toSymbol, change24HourPct, changeHourPct)
+    
     var cryptoCard = 
         `
           <div class="crypto-card w-56 shadow rounded bg-gray-50 rounded-md shadow-lg">
@@ -75,11 +92,11 @@ var buildTopFiveSection = function (data) {
                 ${tickerName}/${toSymbol}
             </p>
             <div class= "card-txt py-2 pl-4 font-light">
-              <p><span class = label>Price:</span> ${price}</p>
-              <p><span class = label>24-HR Price Change:</span> ${change24HourPct}</p>
-              <p><span class = label>1-HR Price Change:</span> ${changeHourPct}</p>
-              <p><span class = label>Twitter followers:</span> 414355</p>
-              <p><span class = label>Sentiment:</span> Bullish</p>
+              <p><span class = "label">Price:</span> ${convertToUSDollars(price)}</p>
+              <p><span class = "label">24-HR Price Change:</span> ${convertToPrecent(change24HourPct)}</p>
+              <p><span class = "label">1-HR Price Change:</span> ${convertToPrecent(changeHourPct)}</p>
+              <p><span class = "label">Twitter followers:</span> 414355</p>
+              <p><span class = "label">Sentiment:</span> Bullish</p>
             </div>
          </div>
         `
