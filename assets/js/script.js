@@ -37,7 +37,28 @@ fetch(API_Base + API_Key)
     var img = document.createElement("img");
     img.setAttribute("src", API_Base + "/media/37746238/eth.png");
     logoDisplayEl.append(img);
+    if(data.DISPLAY.BTC.USD.CHANGEPCT24HOUR> 0){
+      priceChange24El.setAttribute("class", "bg-green-400")
+    }else if( data.DISPLAY.BTC.USD.CHANGEPCT24HOUR < 0){
+      priceChange24El.setAttribute("class", "bg-red-400")
+    }else{
+      return;
+    }
 
+    if(data.DISPLAY.BTC.USD.CHANGEPCTHOUR> 0){
+      priceChange1El.setAttribute("class", "bg-green-400")
+    }else if( data.DISPLAY.BTC.USD.CHANGEPCTHOUR < 0){
+      priceChange1El.setAttribute("class", "bg-red-400")
+    }else{
+      return;
+    }
+    if(data.DISPLAY.BTC.USD.PRICE < data.DISPLAY.BTC.USD.OPENDAY ){
+      currentPriceEl.setAttribute("class", "bg-green-400")
+    }else if(data.DISPLAY.BTC.USD.PRICE > data.DISPLAY.BTC.USD.OPENDAY){
+      currentPriceEl.setAttribute("class", "bg-red-400")
+    }else{
+      return;
+    }
 ////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
     searchButtonEl.addEventListener("click", function (event) {
       var tick = searchInput.value;
@@ -71,16 +92,21 @@ fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     category.textContent = data.Data[9].categories;
   });
 
-
-  fetch("https://api.coinpaprika.com/v1/coins/btc-bitcoin")
+var tickEl =
+  fetch("https://api.coinstats.app/public/v1/coins/bitcoin?currency=AMD")
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
     console.log(data);
-
+    getSearchData(data)
   })
 
+
+var getSearchData = function (data) {
+
+
+}
 
 //***********----------FUNCTION FOR GETTING DATA AFTER SEARCH-----------*************//
 
