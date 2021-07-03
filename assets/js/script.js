@@ -52,9 +52,9 @@ fetch(API_Base + API_Key)
     }else{
       return;
     }
-    if(data.DISPLAY.BTC.USD.PRICE < data.DISPLAY.BTC.USD.OPENDAY ){
+    if(data.DISPLAY.BTC.USD.PRICE > data.DISPLAY.BTC.USD.OPENDAY ){
       currentPriceEl.setAttribute("class", "bg-green-400")
-    }else if(data.DISPLAY.BTC.USD.PRICE > data.DISPLAY.BTC.USD.OPENDAY){
+    }else if(data.DISPLAY.BTC.USD.PRICE < data.DISPLAY.BTC.USD.OPENDAY){
       currentPriceEl.setAttribute("class", "bg-red-400")
     }else{
       return;
