@@ -29,7 +29,7 @@
       "
     >
       <div>
-        <span class="font-bold text-3xl text-white pl-4">Coin Nerds</span>
+        <span class="font-bold text-3xl text-white lg-logo pl-4">Coin Nerds</span>
       </div>
       <!-- navigation bar -->
       <nav>
@@ -86,37 +86,112 @@
           </p>
         </aside>
         <br />
-        <section class="w-7/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl ">
+        <section id="search-area" class="w-7/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl">
           <div id="searh-bar" class="">
-            <form action="submit" class="py-2">
-              <label for="input" class="font-bold text-2xl">Search Crypto</label><br/>
-              <input type="text" placeholder="ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
-              <button id="seach-btn" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400">Search</button>
+            <form class="py-2">
+              <label  for="input" class="font-bold cryptoinsearch text-2xl">Search Crypto</label><br/>
+              <input id="input-area" type="text" placeholder=" ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
+              <button id="search-btn" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400">Search</button>
             </form>
           </div>
           <div id="data-container" class="flex justify-between">
-          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 rounded">
-            <p>Ranking: #1</p>
-            <p id="status">Price: $34,5582.25</p>
-            <p>Market Cap: $62,477,75,67,175.68</p>
-            <p>Price Change 24hr:</p>
-            <p>Price Change 1hr:</p>
-            <p>Price Change 7 Day:</p>
-            <p>Current Supply:</p>
-            <p>Total Supply</p>
-            <p>Twitter followers: 414355</p>
-            <p>Current Supply:</p>
-            <p>Total Supply</p>
-            <p>Twitter followers: 414355</p>
+          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 rounded border-2 ">
+            <p id="logo" class="mb-2 font-bold text-center">BITCOIN CURRENT DATA:</p>
+            <span class="flex justify-between bg-green-50  pl-2 mt-3">
+              <p>OPEN PRICE</p> 
+              <p id="open-price" ></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-3">
+              <p> PRICE: </p>
+              <p id="current-price"></p>
+            </span>
+            <span class="flex justify-between bg-green-50 pl-2 mt-3">
+              <p>PRICE CHANGE 24-HR:</p>
+              <p id="price-chng-24"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-2">
+              <p>PRICE CHANGE 1-HR</p>
+              <p id="price-chng-1"></p>
+            </span>
+            <span class="flex justify-between bg-green-50 pl-2 mt-3">
+              <p>DAILY HIGH:</p>
+              <p id="day-high"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-3">
+              <p>DAILY LOW :</p>
+              <p id="day-low"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-3">
+              <p>VOLUME: </p>
+              <p id="volume"></p>
+            </span>
+            <span class="flex justify-between bg-green-50 pl-2 mt-3">
+              <p>DAILY VOLUME</p>
+              <p id="daily-volume"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-3">
+              <p>MARKET CAP:</p>
+              <p id="market-cap"></p>
+            </span>
           </div>
+          <!-- COPY OF CODE FOR SEARCH DATA (THIS IS SET TO  HIDDEN BY DEFAULT)-->
+          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 rounded border-2 hidden">
+            <p id="logo" class="mb-2 font-bold text-center">ETHERIUM CURRENT DATA:</p>
+            <span class="flex justify-between bg-green-50  pl-2 mt-3">
+              <p>OPEN PRICE</p> 
+              <p id="open-price" ></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-3">
+              <p> PRICE: </p>
+              <p id="current-price"></p>
+            </span>
+            <span class="flex justify-between bg-green-50 pl-2 mt-3">
+              <p>PRICE CHANGE 24-HR:</p>
+              <p id="price-chng-24"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-2">
+              <p>PRICE CHANGE 1-HR</p>
+              <p id="price-chng-1"></p>
+            </span>
+            <span class="flex justify-between bg-green-50 pl-2 mt-3">
+              <p>DAILY HIGH:</p>
+              <p id="day-high"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-3">
+              <p>DAILY LOW :</p>
+              <p id="day-low"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-3">
+              <p>VOLUME: </p>
+              <p id="volume"></p>
+            </span>
+            <span class="flex justify-between bg-green-50 pl-2 mt-3">
+              <p>DAILY VOLUME</p>
+              <p id="daily-volume"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mt-3">
+              <p>MARKET CAP:</p>
+              <p id="market-cap"></p>
+            </span>
+          </div>
+          <!-- END OF COPY -->
+
+
+          <!-- news feed for search area -->
           <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4">
-              <h2 class="mb-4 font-bold ">Top News on Bitcoin</h2>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga ad modi nisi. Mollitia omnis, commodi ipsam rerum ratione alias, aspernatur fugiat asperiores cum ut, debitis voluptates quos consequatur sint error.
+              <h2 id="news-title" class="mb-4 font-bold ">Top News on Bitcoin</h2>
+              <img id="news-img" src="./assets/images/5_sk-how-to-send-new.png" alt="" class="h-20 w-72">
+              <div id="news-txt">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, fugiat fugit. Fuga commodi natus ad. Eius tempore ducimus magni vero nobis facilis, quia iste suscipit.</p>
+              </div>
+              <p id="category" class="pt-2 font-bold">Coin: BTC</p>
+            </div>
           </div>
           </div>
         </section>
       </section>
       <br />
+      <!-- twitter social feed block -->
       <span class="font-bold text-3xl pl-4 text-blue-800"
         >Bitcoin Twitter Feed</span
       >

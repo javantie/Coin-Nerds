@@ -3,3 +3,10 @@ background-image: url("../images/btc-gb2.jfif");
 background-repeat: no-repeat;
 background-size: cover;
 }
+
+.cryptoinsearch {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.lg-logo{
+    font-family:cursive;
+}
