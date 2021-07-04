@@ -1,4 +1,6 @@
 
+var top5ContainerEl = document.querySelector(".top-five-container")
+var btnTwitterFeedEl = document.querySelector(".btc-twitter-feed-section")
 var logoDisplayEl = document.getElementById("logo");
 var currentPriceEl = document.getElementById("current-price");
 var marketCapEl = document.getElementById("market-cap");
@@ -149,7 +151,7 @@ var getSearchData = function (data) {
 
 //**************LIST OF API'S THAT CAN POSSIBLY BE USED*************//
 
-var top5ContainerEl = document.querySelector(".top-five-container")
+
 
 var CryptoCompareAPIKey = "47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 // //Coin Pakrika API #2
@@ -190,8 +192,64 @@ var CryptoCompareAPIKey = "47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a
     //  console.log(data);
     // });
  
- function fetchCoinTwitterFollowers(coinId){
-  var apiURL = `https://min-api.cryptocompare.com/data/social/coin/latest?coinId=${coinId}&apikey=${CryptoCompareAPIKey}`
+
+/********************************************************************************************************************
+ *  Function: buildBtcTwitterFeedSection(data)
+ *  Desscription : 
+*        1. Receives data from endpoint: https://api.coinpaprika.com/v1/coins/btc-bitcoin/twitter"
+*        2. Loop through the array 3 times to retrieve relevant data to build out the Bitcoin Twitter Feed Section
+*        3. Display section on the page
+ *********************************************************************************************************************/
+ var   buildBtcTwitterFeedSection = function(data){
+    console.log(data);
+
+  for (var i=0; i<3; i++){
+
+    var username = data[i].user_name; 
+    var status = data[i].status;
+    var retweetCount = data[i].retweet_count;
+    var likeCount=  data[i].like_count;
+  
+   var twitterCard =
+       `
+          <div class="twitter-card m-4 px-4 w-auto shadow pl-4 py-2 rounded bg-gray-50">
+            <p class="username font-medium text-blue-600">${username}</p>
+            <p class="status">${status}</p>
+            <p class="retweet-count font-medium pt-2 text-blue-600"> Retweets: ${retweetCount}</p>
+            <p class="like-count font-medium text-blue-600">Likes: ${likeCount}</p>
+          </div>
+      `
+    console.log(i)
+    btnTwitterFeedEl.innerHTML += twitterCard;
+  }
+
+  
+ }
+
+ /************************************************************************
+ * Function: fetchTwitterFeedNewsData()
+ * Description: 
+ *      1. Fetch the twitter feed for the bitcoin ticker
+ *      2. Calls buildBtcTwitterFeedSection passing the data retrieved from 
+ *         the api call
+ ***********************************************************************/
+
+ var  fetchTwitterFeedNewsData = function(){
+     var coinPaprikaURL = "https://api.coinpaprika.com/v1/coins/btc-bitcoin/twitter"
+
+    fetch(coinPaprikaURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log("fetchTwitterData(2): " , data)
+    
+      buildBtcTwitterFeedSection(data);
+    });
+ }
+ 
+    function fetchCoinTwitterFollowers(coinId){
+  var apiURL = `https://min-api.cryptocompare.com/data/social/coin/latest?coinId=${coinId}${API_Key}`
  
   fetch(apiURL)
   .then(function (response) {
@@ -297,6 +355,8 @@ var fetchCryptoCompareTopList= function() {
  ************************************************************************/
 var loadPage = function(){
   fetchCryptoCompareTopList();
+  fetchTwitterFeedNewsData();
+  
 }
 
 
