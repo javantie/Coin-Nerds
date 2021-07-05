@@ -20,59 +20,56 @@ var API_Key =
   "&api_key=47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 
 ///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----/////
-fetch(API_Base + API_Key)
+var searchIndividualTickerSymbol = function (tSymbol){
+
+  var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`
+  tSymbol = tSymbol.toUpperCase();
+
+fetch(apiURL+ API_Key)
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
-    console.log(data);
-    currentPriceEl.textContent = data.DISPLAY.BTC.USD.PRICE;
-    marketCapEl.textContent = data.DISPLAY.BTC.USD.MKTCAP;
-    priceChange24El.textContent = data.DISPLAY.BTC.USD.CHANGEPCT24HOUR + "%";
-    priceChange1El.textContent = data.DISPLAY.BTC.USD.CHANGEPCTHOUR + "%";
-    volumeEl.textContent =  data.DISPLAY.BTC.USD.VOLUMEDAYTO;
-    dailyvolumeEl.textContent = data.DISPLAY.BTC.USD.VOLUMEDAYTO;
-    openPriceEl.textContent = data.DISPLAY.BTC.USD.OPENDAY;
-    dayHighEl.textContent = data.DISPLAY.BTC.USD.HIGHDAY;
-    dayLowEl.textContent = data.DISPLAY.BTC.USD.LOWDAY;
+    console.log("then", data);
+    var displayObj = data.DISPLAY
+
+    currentPriceEl.textContent = displayObj[tSymbol].USD.PRICE;
+    marketCapEl.textContent = displayObj[tSymbol].USD.MKTCAP;
+    priceChange24El.textContent = displayObj[tSymbol].USD.CHANGEPCT24HOUR + "%";
+    priceChange1El.textContent = displayObj[tSymbol].USD.CHANGEPCTHOUR + "%";
+    volumeEl.textContent =  displayObj[tSymbol].USD.VOLUMEDAYTO;
+    dailyvolumeEl.textContent = displayObj[tSymbol].USD.VOLUMEDAYTO;
+    openPriceEl.textContent = displayObj[tSymbol].USD.OPENDAY;
+    dayHighEl.textContent = displayObj[tSymbol].USD.HIGHDAY;
+    dayLowEl.textContent = displayObj[tSymbol].USD.LOWDAY;
     var img = document.createElement("img");
     img.setAttribute("src", API_Base + "/media/37746238/eth.png");
     logoDisplayEl.append(img);
-    if(data.DISPLAY.BTC.USD.CHANGEPCT24HOUR> 0){
+    if(displayObj[tSymbol].USD.CHANGEPCT24HOUR> 0){
       priceChange24El.setAttribute("class", "bg-green-400")
-    }else if( data.DISPLAY.BTC.USD.CHANGEPCT24HOUR < 0){
+    }else if( displayObj[tSymbol].USD.CHANGEPCT24HOUR < 0){
       priceChange24El.setAttribute("class", "bg-red-400")
     }else{
       return;
     }
 
-    if(data.DISPLAY.BTC.USD.CHANGEPCTHOUR> 0){
+    if(displayObj[tSymbol].USD.CHANGEPCTHOUR> 0){
       priceChange1El.setAttribute("class", "bg-green-400")
     }else if( data.DISPLAY.BTC.USD.CHANGEPCTHOUR < 0){
       priceChange1El.setAttribute("class", "bg-red-400")
     }else{
       return;
     }
-    if(data.DISPLAY.BTC.USD.PRICE < data.DISPLAY.BTC.USD.OPENDAY ){
+    if(displayObj[tSymbol].USD.PRICE < data.DISPLAY.BTC.USD.OPENDAY ){
       currentPriceEl.setAttribute("class", "bg-green-400")
-    }else if(data.DISPLAY.BTC.USD.PRICE > data.DISPLAY.BTC.USD.OPENDAY){
+    }else if(displayObj[tSymbol].USD.PRICE > data.DISPLAY.BTC.USD.OPENDAY){
       currentPriceEl.setAttribute("class", "bg-red-400")
     }else{
       return;
     }
-////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
-    searchButtonEl.addEventListener("click", function (event) {
-      var tick = searchInput.value;
-      event.preventDefault();
-      if (tick === "") {
-        return;
-      } else {
-        //getSearchData();
-        console.log("Done Search");
-      }
-    });
-  });
 
+  });
+}
   /////////---------CODE FOR LOADING THE NEWS ON CRYPTO------///////
 fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
   .then(function (response) {
@@ -297,9 +294,22 @@ var fetchCryptoCompareTopList= function() {
  ************************************************************************/
 var loadPage = function(){
   fetchCryptoCompareTopList();
+  searchIndividualTickerSymbol("BTC")
 }
 
 
 
 //function called on page load
 loadPage();
+
+////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
+searchButtonEl.addEventListener("click", function (event) {
+  var tick = searchInput.value;
+  event.preventDefault();
+  if (tick === "") {
+    return;
+  } else {
+    searchIndividualTickerSymbol(tick)
+    console.log("Done Search");
+  }
+});
