@@ -253,22 +253,22 @@ var buildTopSection = async function (data) {
     var twitterFollowers = twitterFeedData.Data.Twitter.followers;
 
     var cryptoCard = `
-          <div class="crypto-card w-72 shadow rounded bg-blue-50 shadow-md rounded-bl-xl flex flex-wrap sm:flex sm:flex-wrap sm:mr-2 sm:mt-2">
-            <p class="ticker-name w-72 shadow font-semibold text-blue-600 text-center bg-blue-200 rounded-tr-xl">
+          <div class="crypto-card w-72 shadow rounded bg-blue-50 shadow-md rounded-bl-xl flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60">
+            <p class="ticker-name w-72 shadow font-semibold text-blue-600 text-center bg-blue-200 rounded-tr-xl md:w-80">
                 ${tickerName}/${toSymbol}
             </p>
-            <div class= "card-txt w-72 py-2 pl-4 font-light">
-              <p><span class = "label font-bold">Price:</span> ${convertToUSDollars(
+            <div class= "card-txt w-72 md:w-80 py-2 pl-4 font-light">
+              <p class="font-normal"><span class = "label font-bold">Price:</span> ${convertToUSDollars(
                 price
               )}</p>
-              <p><span class = "label font-bold">Market Cap:</span> ${marketCap}</p>
-              <p><span class = "label font-bold">24-HR Price Change:</span> ${convertToPrecent(
+              <p class="font-normal"><span class = "label font-bold">Market Cap:</span> ${marketCap}</p>
+              <p class="font-normal"><span class = "label font-bold">24-HR Price Change:</span> ${convertToPrecent(
                 change24HourPct
               )}</p>
-              <p><span class = "label font-bold">1-HR Price Change:</span> ${convertToPrecent(
+              <p class="font-normal"><span class = "label font-bold">1-HR Price Change:</span> ${convertToPrecent(
                 changeHourPct
               )}</p>
-              <p><span class = "label font-bold">Twitter followers:</span> ${formatNumbers(
+              <p class="font-normal"><span class = "label font-bold">Twitter followers:</span> ${formatNumbers(
                 twitterFollowers
               )}</p>
             </div>
