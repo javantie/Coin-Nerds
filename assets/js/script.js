@@ -134,8 +134,6 @@ fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
  *        3. Display section on the page
  *********************************************************************************************************************/
 var buildBtcTwitterFeedSection = function (data) {
-  console.log(data);
-
   for (var i = 0; i < 3; i++) {
     var username = data[i].user_name;
     var status = data[i].status;
