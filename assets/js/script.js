@@ -145,8 +145,7 @@ var getSearchData = function (data) {};
 
 //**************LIST OF API'S THAT CAN POSSIBLY BE USED*************//
 
-var CryptoCompareAPIKey =
-  "47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
+
 // //Coin Pakrika API #2
 
 // fetch("https://api.coinlore.net/api/tickers/?start=100&limit=100")
@@ -235,18 +234,20 @@ var fetchTwitterFeedNewsData = function () {
     });
 };
 
-function fetchCoinTwitterFollowers(coinId) {
+/************************************************************************
+ * Function: fetchSocialMediaData(coinId) 
+ * Description:
+ *      1. Fetch and Return the social media infomation for a CryptoCompareCoin ID
+ *      2. Calls buildBtcTwitterFeedSection passing the data retrieved from
+ *         the api call
+ ***********************************************************************/
+
+function fetchSocialMediaData(coinId) {
   var apiURL = `https://min-api.cryptocompare.com/data/social/coin/latest?coinId=${coinId}${API_Key}`;
 
-  console.log("fetchCoinTwitterFollowers: ", apiURL);
-  fetch(apiURL)
-    .then(function (response) {
+  return fetch(apiURL).then(function (response) {
       return response.json();
     })
-    .then(function (data) {
-      console.log("fetchCoinTwitterFollowers: ", data);
-      return data;
-    });
 }
 /******************************************************************
  * Funtion : convertToUSDollars(number)
@@ -273,7 +274,18 @@ var convertToPrecent = function (number) {
   return parseFloat(number).toFixed(2) + "%";
 };
 
+/******************************************************************
+ * Funtion : formatNumbers (num)
+ * Description:
+ *  1. Use number passed in as a parameter and returns a value
+ *     formated with the proper comma placement.
+ *****************************************************************/
+
 var formatNumbers = function (num) {
+
+  if(!num){
+    num = 0
+  }
   var internationalNumberFormat = new Intl.NumberFormat("en-US");
   return internationalNumberFormat.format(num);
 };
@@ -281,13 +293,14 @@ var formatNumbers = function (num) {
 /***************************************************************************************************
  *  Function : buildTopSection(data)
  *  Description:
- *        1. Receives data from endpoint: /min-api.cryptocompare.com/data/top/totaltoptiervolfull
+ *        1. This function is defined as async in order to wait for an api call prior creating the next card
+ *        2. Receives data from endpoint: /min-api.cryptocompare.com/data/top/totaltoptiervolfull
  *        2. Loop through the array 5 times to retrieve relevant data to build out the top 5 section
  *        3. Display section on the page
  **********************************************************************************************/
 var buildTopSection = async function (data) {
   var dataArray = data.Data;
-  //for(var i=0; i<6; i++){
+
   for (const [index, item] of dataArray.entries()) {
     var coinId = dataArray[index].CoinInfo.Id;
     var tickerName = dataArray[index].CoinInfo.Name;
@@ -296,20 +309,9 @@ var buildTopSection = async function (data) {
     var change24HourPct = dataArray[index].RAW.USD.CHANGEPCT24HOUR;
     var changeHourPct = dataArray[index].RAW.USD.CHANGEPCTHOUR;
 
-    var twitterFeedData = await fetchCoinTwitterFollowers(coinId);
-    console.log("twitterFeedData", twitterFeedData);
-    var twitterFollowers = 44523;
-
-    console.log(
-      "buildTopSection: ",
-      coinId,
-      tickerName,
-      toSymbol,
-      price,
-      change24HourPct,
-      changeHourPct,
-      twitterFeedData
-    );
+    //function will wait for this next statement before proceeding
+    var twitterFeedData = await fetchSocialMediaData(coinId);
+    var twitterFollowers = twitterFeedData.Data.Twitter.followers;
 
     var cryptoCard = `
           <div class="crypto-card w-56 shadow rounded bg-gray-50 rounded-md shadow-lg">
@@ -326,10 +328,9 @@ var buildTopSection = async function (data) {
               <p><span class = "label">1-HR Price Change:</span> ${convertToPrecent(
                 changeHourPct
               )}</p>
-              <p><span class = "label">Twitter followers:</span>${formatNumbers(
+              <p><span class = "label">Twitter followers:</span> ${formatNumbers(
                 twitterFollowers
               )}</p>
-              <p><span class = "label">Sentiment:</span> Sentiment</p>
             </div>
          </div>
         `;
@@ -350,7 +351,7 @@ var buildTopSection = async function (data) {
 var fetchCryptoCompareTopList = function () {
   var limit = 10;
   var tsym = "USD";
-  var apiURL = `https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=${limit}&tsym=${tsym}&apikey=${CryptoCompareAPIKey}`;
+  var apiURL = `https://min-api.cryptocompare.com/data/top/totaltoptiervolfull?limit=${limit}&tsym=${tsym}${API_Key}`;
 
   fetch(apiURL)
     .then(function (response) {
