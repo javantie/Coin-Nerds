@@ -307,7 +307,7 @@ var  buildTopFiveSection = function(data) {
 
     var cryptoCard = 
         `
-          <div class="crypto-card w-56 shadow rounded bg-gray-50 rounded-md shadow-lg">
+          <div class="sm:w-72 w-56 crypto-card w-56 shadow rounded bg-gray-50 rounded-md shadow-lg">
             <p class="ticker-name font-semibold text-blue-600 text-center bg-purple-100 rounded-t-md">
                 ${tickerName}/${toSymbol}
             </p>
