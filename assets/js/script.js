@@ -308,6 +308,7 @@ var buildTopSection = async function (data) {
     var price = dataArray[index].RAW.USD.PRICE;
     var change24HourPct = dataArray[index].RAW.USD.CHANGEPCT24HOUR;
     var changeHourPct = dataArray[index].RAW.USD.CHANGEPCTHOUR;
+    var marketCap = dataArray[index].DISPLAY.USD.MKTCAP;
 
     //function will wait for this next statement before proceeding
     var twitterFeedData = await fetchSocialMediaData(coinId);
@@ -319,18 +320,11 @@ var buildTopSection = async function (data) {
                 ${tickerName}/${toSymbol}
             </p>
             <div class= "card-txt py-2 pl-4 font-light">
-              <p><span class = "label">Price:</span> ${convertToUSDollars(
-                price
-              )}</p>
-              <p><span class = "label">24-HR Price Change:</span> ${convertToPrecent(
-                change24HourPct
-              )}</p>
-              <p><span class = "label">1-HR Price Change:</span> ${convertToPrecent(
-                changeHourPct
-              )}</p>
-              <p><span class = "label">Twitter followers:</span> ${formatNumbers(
-                twitterFollowers
-              )}</p>
+              <p><span class = "label">Price:</span> ${convertToUSDollars(price)}</p>
+              <p><span class = "label">Market Cap:</span> ${marketCap}</p>
+              <p><span class = "label">24-HR Price Change:</span> ${convertToPrecent(change24HourPct)}</p>
+              <p><span class = "label">1-HR Price Change:</span> ${convertToPrecent(changeHourPct)}</p>
+              <p><span class = "label">Twitter followers:</span> ${formatNumbers(twitterFollowers)}</p>
             </div>
          </div>
         `;
