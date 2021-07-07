@@ -9,7 +9,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Document</title>
+    <title>Coin Nerds</title>
   </head>
   <body>
     <!-- header -->
@@ -29,20 +29,26 @@
       "
     >
       <div>
-        <span class="font-bold text-3xl text-white pl-4">Coin Nerds</span>
+        <span class="sm:text-2xl font-bold text-3xl text-white lg-logo pl-4">Coin Nerds</span>
       </div>
       <!-- navigation bar -->
       <nav>
         <ul class="flex justify-between px-4">
+          <a href="#">
           <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer ">
             Learn Crypto
           </li>
+          </a>
+          <a href="#">
           <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer">
             Bitcoin News
           </li>
+        </a>
+        <a href="#what-is-crypto">
           <li class="px-4 text-lg text-blue-50 rounded-3xl font-medium cursor-pointer">
             What is Crypto
           </li>
+          </a>
         </ul>
       </nav>
     </header>
@@ -59,129 +65,14 @@
     <!-- Main section -->
     <main class="">
       <!-- newfeed section -->
-      <section class="flex justify-between px-4 mt-4">
-        <div
-          id="crypto-card"
-          class="w-56 shadow rounded bg-gray-50 rounded-md shadow-lg"
-        >
-          <p
-            id="username"
-            class="
-              font-semibold
-              text-blue-600 text-center
-              bg-purple-100
-              rounded-t-md
-            "
-          >
-            BTC/USD
-          </p>
-          <div id="card-txt" class="py-2 pl-4 font-light">
-            <p id="status">Price: $34,5582.25</p>
-            <p>24-HR Price Change : -2.5%</p>
-            <p>1-HR Price Change: 1.5%</p>
-            <p>Twitter followers: 414355</p>
-            <p>Sentiment: Bullish</p>
-          </div>
-        </div>
-        <div
-          id="crypto-card"
-          class="w-56 shadow rounded bg-gray-50 rounded-md shadow-lg"
-        >
-          <p
-            id="username"
-            class="
-              font-semibold
-              text-blue-600 text-center
-              bg-purple-100
-              rounded-t-md
-            "
-          >
-            BTC/USD
-          </p>
-          <div id="card-txt" class="py-2 pl-4 font-light">
-            <p id="status">Price: $34,5582.25</p>
-            <p>24-HR Price Change : -2.5%</p>
-            <p>1-HR Price Change: 1.5%</p>
-            <p>Twitter followers: 414355</p>
-            <p>Sentiment: Bullish</p>
-          </div>
-        </div>
-        <div
-          id="crypto-card"
-          class="w-56 shadow rounded bg-gray-50 rounded-md shadow-lg"
-        >
-          <p
-            id="username"
-            class="
-              font-semibold
-              text-blue-600 text-center
-              bg-purple-100
-              rounded-t-md
-            "
-          >
-            BTC/USD
-          </p>
-          <div id="card-txt" class="py-2 pl-4 font-light">
-            <p id="status">Price: $34,5582.25</p>
-            <p>24-HR Price Change : -2.5%</p>
-            <p>1-HR Price Change: 1.5%</p>
-            <p>Twitter followers: 414355</p>
-            <p>Sentiment: Bullish</p>
-          </div>
-        </div>
-        <div
-          id="crypto-card"
-          class="w-56 shadow rounded bg-gray-50 rounded-md shadow-lg"
-        >
-          <p
-            id="username"
-            class="
-              font-semibold
-              text-blue-600 text-center
-              bg-purple-100
-              rounded-t-md
-            "
-          >
-            BTC/USD
-          </p>
-          <div id="card-txt" class="py-2 pl-4 font-light">
-            <p id="status">Price: $34,5582.25</p>
-            <p>24-HR Price Change : -2.5%</p>
-            <p>1-HR Price Change: 1.5%</p>
-            <p>Twitter followers: 414355</p>
-            <p>Sentiment: Bullish</p>
-          </div>
-        </div>
-        <div
-          id="crypto-card"
-          class="w-56 shadow rounded bg-gray-50 rounded-md shadow-lg"
-        >
-          <p
-            id="username"
-            class="
-              font-semibold
-              text-blue-600 text-center
-              bg-purple-100
-              rounded-t-md
-            "
-          >
-            BTC/USD
-          </p>
-          <div id="card-txt" class="py-2 pl-4 font-light">
-            <p id="status">Price: $34,5582.25</p>
-            <p>24-HR Price Change : -2.5%</p>
-            <p>1-HR Price Change: 1.5%</p>
-            <p>Twitter followers: 414355</p>
-            <p>Sentiment: Bullish</p>
-          </div>
-        </div>
-       
-        </div>
+      <section class=" top-five-container flex justify-between px-4 mt-4">
+
       </section>
       <br />
       <!-- main section for data -->
-      <section class="flex justify-between font-sans">
-        <aside class="w-4/12 pl-4">
+
+      <section class="flex justify-between font-sans sm:flex-col-reverse sm:text-center lg:flex-row lg:text-left">
+        <aside id="what-is-crypto " class="sm:w-full lg:w-4/12 pl-4">
           <h2>WHAT IS BLOCKCHAIN?</h2>
           <p>
             The growing popularity of cryptocurrencies has aroused mainstream
@@ -200,71 +91,81 @@
           </p>
         </aside>
         <br />
-        <section class="w-7/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl ">
-          <div id="searh-bar" class="">
-            <form action="submit" class="py-2">
-              <label for="input" class="font-bold text-2xl">Search Crypto</label><br/>
-              <input type="text" placeholder="ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
-              <button id="seach-btn" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400">Search</button>
+        <section id="search-area" class="w-7/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl sm:w-11/12 sm:place-self-center lg:place-self-auto lg:w-7/12">
+          <div id="searh-bar" class=" flex justify-between">
+            <form class="py-2">
+              <label  for="input" class="font-bold cryptoinsearch text-2xl">Search Crypto</label><br/>
+              <input id="input-area" type="text" placeholder=" ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
+              <button id="search-btn" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400">Search</button>
             </form>
+            <div id="gifholder" class="h-32">
+            </div>
           </div>
           <div id="data-container" class="flex justify-between">
-          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 rounded">
-            <p>Ranking: #1</p>
-            <p id="status">Price: $34,5582.25</p>
-            <p>Market Cap: $62,477,75,67,175.68</p>
-            <p>Price Change 24hr:</p>
-            <p>Price Change 1hr:</p>
-            <p>Price Change 7 Day:</p>
-            <p>Current Supply:</p>
-            <p>Total Supply</p>
-            <p>Twitter followers: 414355</p>
-            <p>Current Supply:</p>
-            <p>Total Supply</p>
-            <p>Twitter followers: 414355</p>
+          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 pr-4 rounded border-2 mb-4">
+            <p id="logo" class="mb-2 font-bold text-xl text-center">(BTC/USD)</p>
+            <span class="flex justify-between bg-green-50 mr-2 pl-2 mt-3">
+              <p class="font-medium">OPEN PRICE</p> 
+              <p id="open-price" ></p>
+            </span>
+            <span class="flex justify-between bg-green-100 mr-2 pl-2 mt-3">
+              <p class="font-medium"> PRICE: </p>
+              <p id="current-price"></p>
+            </span>
+            <span class="flex justify-between bg-green-50  mr-2 pl-2 mt-3">
+              <p class="font-medium">PRICE CHANGE 24-HR:</p>
+              <p id="price-chng-24"></p>
+            </span>
+            <span class="flex justify-between bg-green-100  mr-2 pl-2 mt-2">
+              <p class="font-medium">PRICE CHANGE 1-HR</p>
+              <p id="price-chng-1"></p>
+            </span>
+            <span class="flex justify-between bg-green-50 mr-2 pl-2 mt-3">
+              <p class="font-medium">DAILY HIGH:</p>
+              <p id="day-high"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mr-2 mt-3">
+              <p class="font-medium">DAILY LOW :</p>
+              <p id="day-low"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mr-2 mt-3">
+              <p class="font-medium">VOLUME: </p>
+              <p id="volume"></p>
+            </span>
+            <span class="flex justify-between bg-green-50 pl-2 mr-2 mt-3">
+              <p class="font-medium">DAILY VOLUME</p>
+              <p id="daily-volume"></p>
+            </span>
+            <span class="flex justify-between bg-green-100 pl-2 mr-2 mt-3">
+              <p class="font-medium">MARKET CAP:</p>
+              <p id="market-cap"></p>
+            </span>
+            <!-- Area for search history  -->
+            <h3 class="mt-16 font-medium font-sans text-xl">Search History:</h3> 
+            <div id="search-history" class=" flex justify-start mt-1 mb-5 text-base">
+            </div>
+            <button id="history-clear" class="mb-2 border p-1 text-md font-bold rounded shadow-lg">Clear History</button>
           </div>
-          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4">
-              <h2 class="mb-4 font-bold ">Top News on Bitcoin</h2>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fuga ad modi nisi. Mollitia omnis, commodi ipsam rerum ratione alias, aspernatur fugiat asperiores cum ut, debitis voluptates quos consequatur sint error.
+          <!-- news feed for search area -->
+          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4">
+              <h2 id="news-title" class="mb-4 font-bold ">Top News on Bitcoin</h2>
+              <img id="news-img" src="./assets/images/5_sk-how-to-send-new.png" alt="" class="h-20 w-72">
+              <div id="news-txt">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, fugiat fugit. Fuga commodi natus ad. Eius tempore ducimus magni vero nobis facilis, quia iste suscipit.</p>
+              </div>
+              <p id="category" class="pt-2 font-bold">Coin: BTC</p>
+            </div>
           </div>
           </div>
         </section>
       </section>
       <br />
+      <!-- twitter social feed block -->
       <span class="font-bold text-3xl pl-4 text-blue-800"
         >Bitcoin Twitter Feed</span
       >
-      <section class="flex justify-between px-4 mt-4">
-        <div class="w-auto shadow pl-4 py-2 rounded bg-gray-50">
-          <p id="username" class="font-medium text-blue-600">@thetechgus_54</p>
-          <p id="status">
-            In version 0.21 @bitcoincoreorg added support for Tor V3
-          </p>
-          <p id="retweet-count" class="font-medium pt-2 text-blue-600">
-            Retweets: 5
-          </p>
-          <p id="like-connt" class="font-medium text-blue-600">Likes: 50</p>
-        </div>
-        <div class="w-auto shadow pl-4 py-2 rounded bg-gray-50">
-          <p id="username" class="font-medium text-blue-600">@thetechgus_54</p>
-          <p id="status">
-            In version 0.21 @bitcoincoreorg added support for Tor V3
-          </p>
-          <p id="retweet-count" class="font-medium pt-2 text-blue-600">
-            Retweets: 5
-          </p>
-          <p id="like-connt" class="font-medium text-blue-600">Likes: 50</p>
-        </div>
-        <div class="w-auto shadow pl-4 py-2 rounded bg-gray-50">
-          <p id="username" class="font-medium text-blue-600">@thetechgus_54</p>
-          <p id="status">
-            In version 0.21 @bitcoincoreorg added support for Tor V3
-          </p>
-          <p id="retweet-count" class="font-medium pt-2 text-blue-600">
-            Retweets: 5
-          </p>
-          <p id="like-connt" class="font-medium text-blue-600">Likes: 50</p>
-        </div>
+      <section class="sm:flex-wrap lg:flex-nowrap btc-twitter-feed-section flex justify-between px-4 mt-4">
+        
        
         </section>
       <br />
