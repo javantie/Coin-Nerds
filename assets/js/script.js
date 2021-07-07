@@ -18,6 +18,7 @@ var dataDisplay = document.getElementById("data-display");
 var gifHolder = document.getElementById("gifholder");
 var clearBtnEl = document.getElementById("history-clear");
 var SearchHistoryEl = document.getElementById("search-history");
+var searchTitleEl = document.getElementById("search-title");
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
@@ -48,6 +49,7 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       openPriceEl.textContent = displayObj[tSymbol].USD.OPENDAY;
       dayHighEl.textContent = displayObj[tSymbol].USD.HIGHDAY;
       dayLowEl.textContent = displayObj[tSymbol].USD.LOWDAY;
+      searchTitleEl.textContent = "(" + tSymbol + "/USD)";
 
       if (displayObj[tSymbol].USD.CHANGEPCT24HOUR > 0) {
         priceChange24El.setAttribute("class", "bg-green-400");
@@ -59,7 +61,7 @@ var searchIndividualTickerSymbol = function (tSymbol) {
 
       if (displayObj[tSymbol].USD.CHANGEPCTHOUR > 0) {
         priceChange1El.setAttribute("class", "bg-green-400");
-      } else if (data.DISPLAY.BTC.USD.CHANGEPCTHOUR < 0) {
+      } else if (displayObj[tSymbol].USD.CHANGEPCTHOUR < 0) {
         priceChange1El.setAttribute("class", "bg-red-400");
       } else {
         return;
@@ -81,8 +83,6 @@ var searchIndividualTickerSymbol = function (tSymbol) {
         if (tick === "") {
           return;
         } else {
-          //getSearchData();
-          console.log("Done Search");
         }
       });
     });
@@ -98,10 +98,9 @@ var getgiphy = function (tick) {
     })
     .then(function (response) {
       var num = Math.floor(Math.random() * 10) + 1;
-      console.log(response.data[5].images.fixed_height.url);
       var img = document.createElement("img");
       img.setAttribute("src", response.data[num].images.fixed_height.url);
-      img.setAttribute("class", "h-32 w-60 rounded mr-4");
+      img.setAttribute("class", "h-32 w-60 mr-4 rounded-tr-xl rounded-bl-xl");
       gifHolder.append(img);
     });
 };
@@ -119,7 +118,7 @@ fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     var newsTxtEl = document.getElementById("news-txt");
     var category = document.getElementById("category");
     newsImgEl.setAttribute("src", data.Data[num].imageurl);
-    newsImgEl.setAttribute("class", "rounded h-32 w-80");
+    newsImgEl.setAttribute("class", "rounded h-32 w-80 sm:w-full sm:h-40 sm:mb-2");
 
     newsTitleEl.textContent = data.Data[num].title;
     newsTxtEl.textContent = data.Data[num].body;
@@ -254,29 +253,29 @@ var buildTopSection = async function (data) {
     var twitterFollowers = twitterFeedData.Data.Twitter.followers;
 
     var cryptoCard = `
-          <div class="crypto-card w-56 shadow rounded bg-gray-50 rounded-md shadow-lg">
-            <p class="ticker-name font-semibold text-blue-600 text-center bg-purple-100 rounded-t-md">
+          <div class="crypto-card w-72 shadow rounded bg-blue-50 shadow-md rounded-bl-xl flex flex-wrap sm:flex sm:flex-wrap sm:mr-2 sm:mt-2">
+            <p class="ticker-name w-72 shadow font-semibold text-blue-600 text-center bg-blue-200 rounded-tr-xl">
                 ${tickerName}/${toSymbol}
             </p>
-            <div class= "card-txt py-2 pl-4 font-light">
-              <p><span class = "label">Price:</span> ${convertToUSDollars(
+            <div class= "card-txt w-72 py-2 pl-4 font-light">
+              <p><span class = "label font-bold">Price:</span> ${convertToUSDollars(
                 price
               )}</p>
-              <p><span class = "label">Market Cap:</span> ${marketCap}</p>
-              <p><span class = "label">24-HR Price Change:</span> ${convertToPrecent(
+              <p><span class = "label font-bold">Market Cap:</span> ${marketCap}</p>
+              <p><span class = "label font-bold">24-HR Price Change:</span> ${convertToPrecent(
                 change24HourPct
               )}</p>
-              <p><span class = "label">1-HR Price Change:</span> ${convertToPrecent(
+              <p><span class = "label font-bold">1-HR Price Change:</span> ${convertToPrecent(
                 changeHourPct
               )}</p>
-              <p><span class = "label">Twitter followers:</span> ${formatNumbers(
+              <p><span class = "label font-bold">Twitter followers:</span> ${formatNumbers(
                 twitterFollowers
               )}</p>
             </div>
          </div>
         `;
     top5ContainerEl.innerHTML += cryptoCard;
-    if (index >= 5) break;
+    if (index >= 3) break;
   }
 };
 
