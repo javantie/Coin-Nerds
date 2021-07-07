@@ -29,23 +29,23 @@
       "
     >
       <div>
-        <span class="sm:text-2xl font-bold text-3xl text-white lg-logo pl-4">Coin Nerds</span>
+        <span class="sm:text-3xl font-bold text-1xl text-white lg-logo pl-4">Coin Nerds</span>
       </div>
       <!-- navigation bar -->
       <nav>
-        <ul class="flex justify-between px-4">
+        <ul class="flex justify-between px-4 sm:px-2 ">
           <a href="#">
-          <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer ">
+          <li class=" sm:px-2 px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer ">
             Learn Crypto
           </li>
           </a>
           <a href="#">
-          <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer">
+          <li class=" sm:px-2 px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer">
             Bitcoin News
           </li>
         </a>
         <a href="#what-is-crypto">
-          <li class="px-4 text-lg text-blue-50 rounded-3xl font-medium cursor-pointer">
+          <li class=" sm:px-2 px-4 text-lg text-blue-50 rounded-3xl font-medium cursor-pointer">
             What is Crypto
           </li>
           </a>
@@ -54,7 +54,7 @@
     </header>
     <!-- jumbotron -->
     <section id="jumbotron" class="pt-36 pl-4 h-80 text-white font-serif">
-      <span class="font-bold text-3xl"
+      <span class="font-bold text-3xl sm:text-1xl"
         >Live cryptocurrecnty prices for money movers and makers</span
       >
       <p>
@@ -64,15 +64,14 @@
     </section>
     <!-- Main section -->
     <main class="">
-      <!-- newfeed section -->
-      <section class=" top-five-container flex justify-between px-4 mt-4">
+      <!-- Crypto Feed Section -->
+      <section class=" top-five-container flex flex-wrap justify-between px-4 mt-4 lg:flex-nowrap">
 
       </section>
       <br />
       <!-- main section for data -->
-
-      <section class="flex justify-between font-sans sm:flex-col-reverse sm:text-center lg:flex-row lg:text-left">
-        <aside id="what-is-crypto " class="sm:w-full lg:w-4/12 pl-4">
+      <section class="flex justify-between font-sans sm:flex-col-reverse sm:text-center lg:flex-row lg:flex-wrap lg:pl-16 xl:flex-nowrap">
+        <aside id="what-is-crypto " class="sm:w-full pl-4 lg:text-left xl:w-7/12">
           <h2>WHAT IS BLOCKCHAIN?</h2>
           <p>
             The growing popularity of cryptocurrencies has aroused mainstream
@@ -91,19 +90,19 @@
           </p>
         </aside>
         <br />
-        <section id="search-area" class="w-7/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl sm:w-11/12 sm:place-self-center lg:place-self-auto lg:w-7/12">
+        <section id="search-area" class=" w-11/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl sm:w-11/12 lg:w-11/12 sm:place-self-center lg:place-self-auto lg:w-7/12 lg:mt-5 ">
           <div id="searh-bar" class=" flex justify-between">
             <form class="py-2">
               <label  for="input" class="font-bold cryptoinsearch text-2xl">Search Crypto</label><br/>
-              <input id="input-area" type="text" placeholder=" ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
+              <input id="input-area" type="text" onfocus="this.value=''" placeholder=" ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
               <button id="search-btn" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400">Search</button>
             </form>
             <div id="gifholder" class="h-32">
             </div>
           </div>
-          <div id="data-container" class="flex justify-between">
-          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 pr-4 rounded border-2 mb-4">
-            <p id="logo" class="mb-2 font-bold text-xl text-center">(BTC/USD)</p>
+          <div id="data-container" class="flex justify-between sm:flex-col lg:mr-3 xl:flex-row">
+          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 pr-4 rounded border-2 mb-4 sm:w-full xl:flex-nowrap xl:w-7/12">
+            <p id="search-title" class="mb-2 font-bold text-xl text-center">(BTC/USD)</p>
             <span class="flex justify-between bg-green-50 mr-2 pl-2 mt-3">
               <p class="font-medium">OPEN PRICE</p> 
               <p id="open-price" ></p>
@@ -144,16 +143,16 @@
             <h3 class="mt-16 font-medium font-sans text-xl">Search History:</h3> 
             <div id="search-history" class=" flex justify-start mt-1 mb-5 text-base">
             </div>
-            <button id="history-clear" class="mb-2 border p-1 text-md font-bold rounded shadow-lg">Clear History</button>
+            <button id="history-clear" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400 mb-2">Clear History</button>
           </div>
           <!-- news feed for search area -->
-          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4">
+          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4 sm:w-full pr-2 xl:w-60">
               <h2 id="news-title" class="mb-4 font-bold ">Top News on Bitcoin</h2>
-              <img id="news-img" src="./assets/images/5_sk-how-to-send-new.png" alt="" class="h-20 w-72">
+              <img id="news-img" src="./assets/images/5_sk-how-to-send-new.png" alt="" class="h-20 w-72 sm:text-center">
               <div id="news-txt">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, fugiat fugit. Fuga commodi natus ad. Eius tempore ducimus magni vero nobis facilis, quia iste suscipit.</p>
               </div>
-              <p id="category" class="pt-2 font-bold">Coin: BTC</p>
+              <p id="category" class="pt-2 font-bold sm:text-left">Coin: BTC</p>
             </div>
           </div>
           </div>
@@ -161,10 +160,10 @@
       </section>
       <br />
       <!-- twitter social feed block -->
-      <span class="font-bold text-3xl pl-4 text-blue-800"
+      <span class="font-bold text-3xl pl-4 text-blue-800 ml-3 sm:mt-4"
         >Bitcoin Twitter Feed</span
       >
-      <section class="sm:flex-wrap lg:flex-nowrap btc-twitter-feed-section flex justify-between px-4 mt-4">
+      <section class="sm:flex-wrap lg:flex-nowrap btc-twitter-feed-section flex justify-between px-4 mt-3">
         
        
         </section>
