@@ -14,6 +14,7 @@ var searchButtonEl = document.getElementById("search-btn");
 var dataContainerEl = document.getElementById("data-container");
 var newDataContainerEl = document.getElementById("new-data-container");
 var dataDisplay = document.getElementById("data-display");
+var gifHolder = document.getElementById("gifholder")
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
@@ -30,8 +31,11 @@ fetch(apiURL+ API_Key)
     return response.json();
   })
   .then(function (data) {
-    console.log("then", data);
+    //console.log("then", data);
     var displayObj = data.DISPLAY
+    // console.log(displayObj)
+    // console.log(tSymbol)
+    
 
     currentPriceEl.textContent = displayObj[tSymbol].USD.PRICE;
     marketCapEl.textContent = displayObj[tSymbol].USD.MKTCAP;
@@ -42,9 +46,7 @@ fetch(apiURL+ API_Key)
     openPriceEl.textContent = displayObj[tSymbol].USD.OPENDAY;
     dayHighEl.textContent = displayObj[tSymbol].USD.HIGHDAY;
     dayLowEl.textContent = displayObj[tSymbol].USD.LOWDAY;
-    var img = document.createElement("img");
-    img.setAttribute("src", API_Base + "/media/37746238/eth.png");
-    logoDisplayEl.append(img);
+    
     if(displayObj[tSymbol].USD.CHANGEPCT24HOUR> 0){
       priceChange24El.setAttribute("class", "bg-green-400")
     }else if( displayObj[tSymbol].USD.CHANGEPCT24HOUR < 0){
@@ -61,132 +63,56 @@ fetch(apiURL+ API_Key)
       return;
     }
     if(displayObj[tSymbol].USD.PRICE < data.DISPLAY.BTC.USD.OPENDAY ){
-      currentPriceEl.setAttribute("class", "bg-green-400")
-    }else if(displayObj[tSymbol].USD.PRICE > data.DISPLAY.BTC.USD.OPENDAY){
       currentPriceEl.setAttribute("class", "bg-red-400")
+    }else if(displayObj[tSymbol].USD.PRICE > data.DISPLAY.BTC.USD.OPENDAY){
+      currentPriceEl.setAttribute("class", "bg-green-400")
     }else{
       return;
     }
+  });
+}
+var getgiphy = function(tick){
+fetch("https:api.giphy.com/v1/gifs/search?q=" + tick + "&api_key=s5QeHwd3F0ZSScsfU69FCbZv9Untc0mC"
+)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (response) {
+        var num = Math.floor(Math.random() * 10) + 1;
+        console.log(response.data[5].images.fixed_height.url);
+        var img = document.createElement("img");
+        img.setAttribute("src", response.data[num].images.fixed_height.url);
+        img.setAttribute("class", "h-32 w-60 rounded mr-4")
+        gifHolder.append(img);
 
   });
 }
-  /////////---------CODE FOR LOADING THE NEWS ON CRYPTO------///////
+getgiphy("crypto")
+
+/////////---------CODE FOR LOADING THE NEWS ON CRYPTO------///////
 fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
-    console.log(data.Data[5]);
-
+    var num = Math.floor(Math.random() * 10) + 1;
     var newsTitleEl = document.getElementById("news-title");
     var newsImgEl = document.getElementById("news-img");
     var newsTxtEl = document.getElementById("news-txt");
     var category = document.getElementById("category");
-    newsImgEl.setAttribute("src", data.Data[9].imageurl);
+    newsImgEl.setAttribute("src", data.Data[num].imageurl);
     newsImgEl.setAttribute("class", "rounded h-32 w-80");
 
-    newsTitleEl.textContent = data.Data[9].title;
-    newsTxtEl.textContent = data.Data[9].body;
-    category.textContent = data.Data[9].categories;
+    newsTitleEl.textContent = data.Data[num].title;
+    newsTxtEl.textContent = data.Data[num].body;
+    category.textContent = data.Data[num].categories;
   });
 
-var tickEl =
-  fetch("https://api.coinstats.app/public/v1/coins/bitcoin?currency=AMD")
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    getSearchData(data)
-  })
-
-
-var getSearchData = function (data) {
-
-
-}
-
-//***********----------FUNCTION FOR GETTING DATA AFTER SEARCH-----------*************//
-
-// var getSearchData = function () {
-//   //dataContainerEl.innerHTML = "";
-//   var tick = searchInput.value;
-//   console.log(tick);
-
-//   var API_Base =
-//     "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" +
-//     tick +
-//     "&tsyms=USD";
-//   fetch(API_Base + API_Key)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//         // currentPriceEl.textContent = "PRICE: " + data.DISPLAY[0].USD.PRICE;
-//         // marketCapEl.textContent = "MARKET CAP: " + data.DISPLAY.tick.USD.MKTCAP;
-//         // priceChange24El.textContent =
-//         //   "PRICE CHANGE 24-HR: " + data.DISPLAY.tick.USD.CHANGEPCT24HOUR + "%";
-//         // priceChange1El.textContent =
-//         //   "PRICE CHANGE 1-HR " + data.DISPLAY.tick.USD.CHANGEPCTHOUR + "%";
-//         // volumeEl.textContent = "VOLUME: " + data.DISPLAY.tick.USD.VOLUMEDAYTO;
-//         // dailyvolumeEl.textContent =
-//         //   "DAILY VOLUME " + data.DISPLAY.tick.USD.VOLUMEDAYTO;
-//         // currentSupplyEl.textContent = "OPEN PRICE: " + data.DISPLAY.tick.USD.OPENDAY;
-//         // dayHighEl.textContent = "DAILY HIGH: " + data.DISPLAY.tick.USD.HIGHDAY;
-//         // dayLowEl.textContent = "DAILY LOW : " + data.DISPLAY.tick.USD.LOWDAY;
-//         // var img = document.createElement("img");
-//         // img.setAttribute("src", API_Base + "/media/37746238/eth.png");
-//         // logoDisplayEl.append(img);
-//         // console.log(img);
-//     });
-// };
-
-
-
-//**************LIST OF API'S THAT CAN POSSIBLY BE USED*************//
 
 var top5ContainerEl = document.querySelector(".top-five-container")
 
 var CryptoCompareAPIKey = "47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
-// //Coin Pakrika API #2
 
-// fetch("https://api.coinlore.net/api/tickers/?start=100&limit=100")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//    console.log(data);
-//   });
-// //Coin Pakrika API #2
-
-//   fetch("https://api.coinlore.net/api/coin/markets/?id=90")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//    console.log(data);
-//   });
-
-//   ///Redit API
-
-//   fetch("https://dashboard.nbshare.io/api/v1/apps/reddit")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//    console.log(data);
-//   });
-
-    ///Crypto Cpmare API
-    // fetch("https://min-api.cryptocompare.com/data/all/coinlist")
-    // .then(function (response) {
-    //   return response.json();
-    // })
-    // .then(function (data) {
-    //  console.log(data);
-    // });
- 
  function fetchCoinTwitterFollowers(coinId){
   var apiURL = `https://min-api.cryptocompare.com/data/social/coin/latest?coinId=${coinId}&apikey=${CryptoCompareAPIKey}`
  
@@ -299,7 +225,7 @@ var loadPage = function(){
 
 
 
-//function called on page load
+//Function called on page load
 loadPage();
 
 ////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
@@ -310,6 +236,8 @@ searchButtonEl.addEventListener("click", function (event) {
     return;
   } else {
     searchIndividualTickerSymbol(tick)
-    console.log("Done Search");
+    getgiphy(tick)
+    gifHolder.innerHTML=""
   }
 });
+
