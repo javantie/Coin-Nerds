@@ -201,8 +201,6 @@ var CryptoCompareAPIKey = "47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a
 *        3. Display section on the page
  *********************************************************************************************************************/
  var   buildBtcTwitterFeedSection = function(data){
-    console.log(data);
-
   for (var i=0; i<3; i++){
 
     var username = data[i].user_name; 
@@ -219,7 +217,6 @@ var CryptoCompareAPIKey = "47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a
             <p class="like-count font-medium text-blue-600">Likes: ${likeCount}</p>
           </div>
       `
-    console.log(i)
     btnTwitterFeedEl.innerHTML += twitterCard;
   }
 
@@ -295,7 +292,7 @@ var convertToPrecent = function(number){
  **********************************************************************************************/
 var  buildTopFiveSection = function(data) {
 
-  for(var i=0; i<5; i++){
+  for(var i=0; i<6; i++){
     var coinId = data.Data[i].CoinInfo.Id;
     var tickerName = data.Data[i].CoinInfo.Name;
     var toSymbol = data.Data[i].RAW.USD.TOSYMBOL;
