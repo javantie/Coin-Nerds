@@ -15,64 +15,97 @@ var searchButtonEl = document.getElementById("search-btn");
 var dataContainerEl = document.getElementById("data-container");
 var newDataContainerEl = document.getElementById("new-data-container");
 var dataDisplay = document.getElementById("data-display");
+var gifHolder = document.getElementById("gifholder");
+var clearBtnEl = document.getElementById("history-clear");
+var SearchHistoryEl = document.getElementById("search-history");
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
   "&api_key=47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 
 ///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----/////
-fetch(API_Base + API_Key)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    currentPriceEl.textContent = data.DISPLAY.BTC.USD.PRICE;
-    marketCapEl.textContent = data.DISPLAY.BTC.USD.MKTCAP;
-    priceChange24El.textContent = data.DISPLAY.BTC.USD.CHANGEPCT24HOUR + "%";
-    priceChange1El.textContent = data.DISPLAY.BTC.USD.CHANGEPCTHOUR + "%";
-    volumeEl.textContent = data.DISPLAY.BTC.USD.VOLUMEDAYTO;
-    dailyvolumeEl.textContent = data.DISPLAY.BTC.USD.VOLUMEDAYTO;
-    openPriceEl.textContent = data.DISPLAY.BTC.USD.OPENDAY;
-    dayHighEl.textContent = data.DISPLAY.BTC.USD.HIGHDAY;
-    dayLowEl.textContent = data.DISPLAY.BTC.USD.LOWDAY;
-    var img = document.createElement("img");
-    img.setAttribute("src", API_Base + "/media/37746238/eth.png");
-    logoDisplayEl.append(img);
-    if (data.DISPLAY.BTC.USD.CHANGEPCT24HOUR > 0) {
-      priceChange24El.setAttribute("class", "bg-green-400");
-    } else if (data.DISPLAY.BTC.USD.CHANGEPCT24HOUR < 0) {
-      priceChange24El.setAttribute("class", "bg-red-400");
-    } else {
-      return;
-    }
+var searchIndividualTickerSymbol = function (tSymbol) {
+  var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`;
+  tSymbol = tSymbol.toUpperCase();
 
-    if (data.DISPLAY.BTC.USD.CHANGEPCTHOUR > 0) {
-      priceChange1El.setAttribute("class", "bg-green-400");
-    } else if (data.DISPLAY.BTC.USD.CHANGEPCTHOUR < 0) {
-      priceChange1El.setAttribute("class", "bg-red-400");
-    } else {
-      return;
-    }
-    if (data.DISPLAY.BTC.USD.PRICE < data.DISPLAY.BTC.USD.OPENDAY) {
-      currentPriceEl.setAttribute("class", "bg-green-400");
-    } else if (data.DISPLAY.BTC.USD.PRICE > data.DISPLAY.BTC.USD.OPENDAY) {
-      currentPriceEl.setAttribute("class", "bg-red-400");
-    } else {
-      return;
-    }
-    ////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
-    searchButtonEl.addEventListener("click", function (event) {
-      var tick = searchInput.value;
-      event.preventDefault();
-      if (tick === "") {
-        return;
+  fetch(apiURL + API_Key)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      //console.log("then", data);
+      var displayObj = data.DISPLAY;
+      // console.log(displayObj)
+      // console.log(tSymbol)
+
+      currentPriceEl.textContent = displayObj[tSymbol].USD.PRICE;
+      marketCapEl.textContent = displayObj[tSymbol].USD.MKTCAP;
+      priceChange24El.textContent =
+        displayObj[tSymbol].USD.CHANGEPCT24HOUR + "%";
+      priceChange1El.textContent = displayObj[tSymbol].USD.CHANGEPCTHOUR + "%";
+      volumeEl.textContent = displayObj[tSymbol].USD.VOLUMEDAYTO;
+      dailyvolumeEl.textContent = displayObj[tSymbol].USD.VOLUMEDAYTO;
+      openPriceEl.textContent = displayObj[tSymbol].USD.OPENDAY;
+      dayHighEl.textContent = displayObj[tSymbol].USD.HIGHDAY;
+      dayLowEl.textContent = displayObj[tSymbol].USD.LOWDAY;
+
+      if (displayObj[tSymbol].USD.CHANGEPCT24HOUR > 0) {
+        priceChange24El.setAttribute("class", "bg-green-400");
+      } else if (displayObj[tSymbol].USD.CHANGEPCT24HOUR < 0) {
+        priceChange24El.setAttribute("class", "bg-red-400");
       } else {
-        //getSearchData();
-        console.log("Done Search");
+        return;
       }
+
+      if (displayObj[tSymbol].USD.CHANGEPCTHOUR > 0) {
+        priceChange1El.setAttribute("class", "bg-green-400");
+      } else if (data.DISPLAY.BTC.USD.CHANGEPCTHOUR < 0) {
+        priceChange1El.setAttribute("class", "bg-red-400");
+      } else {
+        return;
+      }
+      if (displayObj[tSymbol].USD.PRICE < displayObj[tSymbol].USD.OPENDAY) {
+        currentPriceEl.setAttribute("class", "bg-red-400");
+      } else if (
+        displayObj[tSymbol].USD.PRICE > displayObj[tSymbol].USD.OPENDAY
+      ) {
+        currentPriceEl.setAttribute("class", "bg-green-400");
+      } else {
+        return;
+      }
+
+      ////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
+      searchButtonEl.addEventListener("click", function (event) {
+        var tick = searchInput.value;
+        event.preventDefault();
+        if (tick === "") {
+          return;
+        } else {
+          //getSearchData();
+          console.log("Done Search");
+        }
+      });
     });
-  });
+};
+var getgiphy = function (tick) {
+  fetch(
+    "https:api.giphy.com/v1/gifs/search?q=" +
+      tick +
+      "&api_key=s5QeHwd3F0ZSScsfU69FCbZv9Untc0mC"
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (response) {
+      var num = Math.floor(Math.random() * 10) + 1;
+      console.log(response.data[5].images.fixed_height.url);
+      var img = document.createElement("img");
+      img.setAttribute("src", response.data[num].images.fixed_height.url);
+      img.setAttribute("class", "h-32 w-60 rounded mr-4");
+      gifHolder.append(img);
+    });
+};
+getgiphy("crypto");
 
 /////////---------CODE FOR LOADING THE NEWS ON CRYPTO------///////
 fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
@@ -80,109 +113,18 @@ fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     return response.json();
   })
   .then(function (data) {
-    console.log(data.Data[5]);
-
+    var num = Math.floor(Math.random() * 10) + 1;
     var newsTitleEl = document.getElementById("news-title");
     var newsImgEl = document.getElementById("news-img");
     var newsTxtEl = document.getElementById("news-txt");
     var category = document.getElementById("category");
-    newsImgEl.setAttribute("src", data.Data[9].imageurl);
+    newsImgEl.setAttribute("src", data.Data[num].imageurl);
     newsImgEl.setAttribute("class", "rounded h-32 w-80");
 
-    newsTitleEl.textContent = data.Data[9].title;
-    newsTxtEl.textContent = data.Data[9].body;
-    category.textContent = data.Data[9].categories;
+    newsTitleEl.textContent = data.Data[num].title;
+    newsTxtEl.textContent = data.Data[num].body;
+    category.textContent = data.Data[num].categories;
   });
-
-var tickEl = fetch(
-  "https://api.coinstats.app/public/v1/coins/bitcoin?currency=AMD"
-)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
-    getSearchData(data);
-  });
-
-var getSearchData = function (data) {};
-
-//***********----------FUNCTION FOR GETTING DATA AFTER SEARCH-----------*************//
-
-// var getSearchData = function () {
-//   //dataContainerEl.innerHTML = "";
-//   var tick = searchInput.value;
-//   console.log(tick);
-
-//   var API_Base =
-//     "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=" +
-//     tick +
-//     "&tsyms=USD";
-//   fetch(API_Base + API_Key)
-//     .then(function (response) {
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-//         // currentPriceEl.textContent = "PRICE: " + data.DISPLAY[0].USD.PRICE;
-//         // marketCapEl.textContent = "MARKET CAP: " + data.DISPLAY.tick.USD.MKTCAP;
-//         // priceChange24El.textContent =
-//         //   "PRICE CHANGE 24-HR: " + data.DISPLAY.tick.USD.CHANGEPCT24HOUR + "%";
-//         // priceChange1El.textContent =
-//         //   "PRICE CHANGE 1-HR " + data.DISPLAY.tick.USD.CHANGEPCTHOUR + "%";
-//         // volumeEl.textContent = "VOLUME: " + data.DISPLAY.tick.USD.VOLUMEDAYTO;
-//         // dailyvolumeEl.textContent =
-//         //   "DAILY VOLUME " + data.DISPLAY.tick.USD.VOLUMEDAYTO;
-//         // currentSupplyEl.textContent = "OPEN PRICE: " + data.DISPLAY.tick.USD.OPENDAY;
-//         // dayHighEl.textContent = "DAILY HIGH: " + data.DISPLAY.tick.USD.HIGHDAY;
-//         // dayLowEl.textContent = "DAILY LOW : " + data.DISPLAY.tick.USD.LOWDAY;
-//         // var img = document.createElement("img");
-//         // img.setAttribute("src", API_Base + "/media/37746238/eth.png");
-//         // logoDisplayEl.append(img);
-//         // console.log(img);
-//     });
-// };
-
-//**************LIST OF API'S THAT CAN POSSIBLY BE USED*************//
-
-
-// //Coin Pakrika API #2
-
-// fetch("https://api.coinlore.net/api/tickers/?start=100&limit=100")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//    console.log(data);
-//   });
-// //Coin Pakrika API #2
-
-//   fetch("https://api.coinlore.net/api/coin/markets/?id=90")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//    console.log(data);
-//   });
-
-//   ///Redit API
-
-//   fetch("https://dashboard.nbshare.io/api/v1/apps/reddit")
-//   .then(function (response) {
-//     return response.json();
-//   })
-//   .then(function (data) {
-//    console.log(data);
-//   });
-
-///Crypto Cpmare API
-// fetch("https://min-api.cryptocompare.com/data/all/coinlist")
-// .then(function (response) {
-//   return response.json();
-// })
-// .then(function (data) {
-//  console.log(data);
-// });
 
 /********************************************************************************************************************
  *  Function: buildBtcTwitterFeedSection(data)
@@ -192,8 +134,6 @@ var getSearchData = function (data) {};
  *        3. Display section on the page
  *********************************************************************************************************************/
 var buildBtcTwitterFeedSection = function (data) {
-  console.log(data);
-
   for (var i = 0; i < 3; i++) {
     var username = data[i].user_name;
     var status = data[i].status;
@@ -235,7 +175,7 @@ var fetchTwitterFeedNewsData = function () {
 };
 
 /************************************************************************
- * Function: fetchSocialMediaData(coinId) 
+ * Function: fetchSocialMediaData(coinId)
  * Description:
  *      1. Fetch and Return the social media infomation for a CryptoCompareCoin ID
  *      2. Calls buildBtcTwitterFeedSection passing the data retrieved from
@@ -246,8 +186,8 @@ function fetchSocialMediaData(coinId) {
   var apiURL = `https://min-api.cryptocompare.com/data/social/coin/latest?coinId=${coinId}${API_Key}`;
 
   return fetch(apiURL).then(function (response) {
-      return response.json();
-    })
+    return response.json();
+  });
 }
 /******************************************************************
  * Funtion : convertToUSDollars(number)
@@ -282,9 +222,8 @@ var convertToPrecent = function (number) {
  *****************************************************************/
 
 var formatNumbers = function (num) {
-
-  if(!num){
-    num = 0
+  if (!num) {
+    num = 0;
   }
   var internationalNumberFormat = new Intl.NumberFormat("en-US");
   return internationalNumberFormat.format(num);
@@ -320,11 +259,19 @@ var buildTopSection = async function (data) {
                 ${tickerName}/${toSymbol}
             </p>
             <div class= "card-txt py-2 pl-4 font-light">
-              <p><span class = "label">Price:</span> ${convertToUSDollars(price)}</p>
+              <p><span class = "label">Price:</span> ${convertToUSDollars(
+                price
+              )}</p>
               <p><span class = "label">Market Cap:</span> ${marketCap}</p>
-              <p><span class = "label">24-HR Price Change:</span> ${convertToPrecent(change24HourPct)}</p>
-              <p><span class = "label">1-HR Price Change:</span> ${convertToPrecent(changeHourPct)}</p>
-              <p><span class = "label">Twitter followers:</span> ${formatNumbers(twitterFollowers)}</p>
+              <p><span class = "label">24-HR Price Change:</span> ${convertToPrecent(
+                change24HourPct
+              )}</p>
+              <p><span class = "label">1-HR Price Change:</span> ${convertToPrecent(
+                changeHourPct
+              )}</p>
+              <p><span class = "label">Twitter followers:</span> ${formatNumbers(
+                twitterFollowers
+              )}</p>
             </div>
          </div>
         `;
@@ -362,8 +309,53 @@ var fetchCryptoCompareTopList = function () {
  ************************************************************************/
 var loadPage = function () {
   fetchCryptoCompareTopList();
+  searchIndividualTickerSymbol("BTC");
   fetchTwitterFeedNewsData();
 };
 
-//function called on page load
+//Function called on page load
 loadPage();
+
+////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
+searchButtonEl.addEventListener("click", function (event) {
+  var tick = searchInput.value;
+  event.preventDefault();
+  if (tick === "") {
+    return;
+  } else {
+    searchIndividualTickerSymbol(tick);
+    getgiphy(tick);
+    gifHolder.innerHTML = "";
+  }
+  saveSeachData(tick);
+});
+
+//Save data to local storage
+var oldData = [];
+var saveSeachData = function (tick) {
+  newData = {
+    text: tick,
+  };
+  oldData.push(newData);
+  localStorage.setItem("search", JSON.stringify(oldData));
+};
+
+//Load data from local storage
+var loadData = function () {
+  oldData = JSON.parse(localStorage.getItem("search")) || [];
+  //console.log(oldData);
+  for (let i = 0; i < oldData.length; i++) {
+    search = document.createElement("p");
+    search.setAttribute(
+      "class",
+      "mx-3 bg-gray-200 px-3 py-1 rounded text-lg cursor-pointer"
+    );
+    search.textContent = oldData[i].text;
+    SearchHistoryEl.append(search);
+  }
+};
+loadData();
+
+clearBtnEl.addEventListener("click", function () {
+  localStorage.clear();
+});
