@@ -34,15 +34,21 @@
       <!-- navigation bar -->
       <nav>
         <ul class="flex justify-between px-4">
+          <a href="#">
           <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer ">
             Learn Crypto
           </li>
+          </a>
+          <a href="#">
           <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer">
             Bitcoin News
           </li>
+        </a>
+        <a href="#what-is-crypto">
           <li class="px-4 text-lg text-blue-50 rounded-3xl font-medium cursor-pointer">
             What is Crypto
           </li>
+          </a>
         </ul>
       </nav>
     </header>
@@ -65,7 +71,7 @@
       <br />
       <!-- main section for data -->
       <section class="flex justify-between font-sans">
-        <aside class="w-4/12 pl-4">
+        <aside id="what-is-crypto" class="w-4/12 pl-4">
           <h2>WHAT IS BLOCKCHAIN?</h2>
           <p>
             The growing popularity of cryptocurrencies has aroused mainstream
@@ -135,14 +141,14 @@
             </span>
 
             <h3 class="mt-16 font-medium font-sans text-xl">Search History:</h3> 
-            <div id="search-history" class=" flex justify-center mt-1 mb-10 text-base">
+            <div id="search-history" class=" flex justify-start mt-1 mb-5 text-base">
+              <!-- <p class="mx-3 bg-gray-200 px-3 py-1 rounded text-lg">BTC</p>
               <p class="mx-3 bg-gray-200 px-3 py-1 rounded text-lg">BTC</p>
               <p class="mx-3 bg-gray-200 px-3 py-1 rounded text-lg">BTC</p>
               <p class="mx-3 bg-gray-200 px-3 py-1 rounded text-lg">BTC</p>
-              <p class="mx-3 bg-gray-200 px-3 py-1 rounded text-lg">BTC</p>
-              <p class="mx-3 bg-gray-200 px-3 py-1 rounded text-lg">BTC</p>
+              <p class="mx-3 bg-gray-200 px-3 py-1 rounded text-lg">BTC</p> -->
             </div>
-            <button id="history-clear" class="mb-4 border p-1 text-md font-bold rounded shadow-lg">Clear History</button>
+            <button id="history-clear" class="mb-2 border p-1 text-md font-bold rounded shadow-lg">Clear History</button>
           </div>
           <!-- news feed for search area -->
           <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4">

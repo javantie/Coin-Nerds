@@ -15,6 +15,8 @@ var dataContainerEl = document.getElementById("data-container");
 var newDataContainerEl = document.getElementById("new-data-container");
 var dataDisplay = document.getElementById("data-display");
 var gifHolder = document.getElementById("gifholder")
+var clearBtnEl = document.getElementById("history-clear")
+var SearchHistoryEl = document.getElementById("search-history")
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
@@ -239,5 +241,35 @@ searchButtonEl.addEventListener("click", function (event) {
     getgiphy(tick)
     gifHolder.innerHTML=""
   }
+  saveSeachData(tick)
+
 });
 
+//Save data to local storage
+var oldData = [];
+var saveSeachData = function (tick) {
+  newData = {
+    text: tick,
+  };
+  oldData.push(newData);
+  localStorage.setItem("search", JSON.stringify(oldData));
+};
+
+//Load data from local storage
+var loadData = function () {
+  oldData = JSON.parse(localStorage.getItem("search")) || [];
+  //console.log(oldData);
+  for (let i = 0; i < oldData.length; i++) {
+    search = document.createElement("p");
+    search.setAttribute("class", "mx-3 bg-gray-200 px-3 py-1 rounded text-lg cursor-pointer");
+    search.textContent = oldData[i].text;
+    SearchHistoryEl.append(search);
+  }
+};
+loadData();
+
+
+
+clearBtnEl.addEventListener("click", function(){
+  localStorage.clear();
+})
