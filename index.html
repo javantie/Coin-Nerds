@@ -34,15 +34,21 @@
       <!-- navigation bar -->
       <nav>
         <ul class="flex justify-between px-4">
+          <a href="#">
           <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer ">
             Learn Crypto
           </li>
+          </a>
+          <a href="#">
           <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer">
             Bitcoin News
           </li>
+        </a>
+        <a href="#what-is-crypto">
           <li class="px-4 text-lg text-blue-50 rounded-3xl font-medium cursor-pointer">
             What is Crypto
           </li>
+          </a>
         </ul>
       </nav>
     </header>
@@ -60,14 +66,12 @@
     <main class="">
       <!-- newfeed section -->
       <section class=" top-five-container flex justify-between px-4 mt-4">
-       
-
 
       </section>
       <br />
       <!-- main section for data -->
       <section class="flex justify-between font-sans">
-        <aside class="w-4/12 pl-4">
+        <aside id="what-is-crypto" class="w-4/12 pl-4">
           <h2>WHAT IS BLOCKCHAIN?</h2>
           <p>
             The growing popularity of cryptocurrencies has aroused mainstream
@@ -87,98 +91,62 @@
         </aside>
         <br />
         <section id="search-area" class="w-7/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl">
-          <div id="searh-bar" class="">
+          <div id="searh-bar" class=" flex justify-between">
             <form class="py-2">
               <label  for="input" class="font-bold cryptoinsearch text-2xl">Search Crypto</label><br/>
               <input id="input-area" type="text" placeholder=" ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
               <button id="search-btn" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400">Search</button>
             </form>
+            <div id="gifholder" class="h-32">
+            </div>
           </div>
           <div id="data-container" class="flex justify-between">
-          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 rounded border-2 ">
-            <p id="logo" class="mb-2 font-bold text-center">BITCOIN CURRENT DATA:</p>
-            <span class="flex justify-between bg-green-50  pl-2 mt-3">
-              <p>OPEN PRICE</p> 
+          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 pr-4 rounded border-2 mb-4">
+            <p id="logo" class="mb-2 font-bold text-xl text-center">(BTC/USD)</p>
+            <span class="flex justify-between bg-green-50 mr-2 pl-2 mt-3">
+              <p class="font-medium">OPEN PRICE</p> 
               <p id="open-price" ></p>
             </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-3">
-              <p> PRICE: </p>
+            <span class="flex justify-between bg-green-100 mr-2 pl-2 mt-3">
+              <p class="font-medium"> PRICE: </p>
               <p id="current-price"></p>
             </span>
-            <span class="flex justify-between bg-green-50 pl-2 mt-3">
-              <p>PRICE CHANGE 24-HR:</p>
+            <span class="flex justify-between bg-green-50  mr-2 pl-2 mt-3">
+              <p class="font-medium">PRICE CHANGE 24-HR:</p>
               <p id="price-chng-24"></p>
             </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-2">
-              <p>PRICE CHANGE 1-HR</p>
+            <span class="flex justify-between bg-green-100  mr-2 pl-2 mt-2">
+              <p class="font-medium">PRICE CHANGE 1-HR</p>
               <p id="price-chng-1"></p>
             </span>
-            <span class="flex justify-between bg-green-50 pl-2 mt-3">
-              <p>DAILY HIGH:</p>
+            <span class="flex justify-between bg-green-50 mr-2 pl-2 mt-3">
+              <p class="font-medium">DAILY HIGH:</p>
               <p id="day-high"></p>
             </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-3">
-              <p>DAILY LOW :</p>
+            <span class="flex justify-between bg-green-100 pl-2 mr-2 mt-3">
+              <p class="font-medium">DAILY LOW :</p>
               <p id="day-low"></p>
             </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-3">
-              <p>VOLUME: </p>
+            <span class="flex justify-between bg-green-100 pl-2 mr-2 mt-3">
+              <p class="font-medium">VOLUME: </p>
               <p id="volume"></p>
             </span>
-            <span class="flex justify-between bg-green-50 pl-2 mt-3">
-              <p>DAILY VOLUME</p>
+            <span class="flex justify-between bg-green-50 pl-2 mr-2 mt-3">
+              <p class="font-medium">DAILY VOLUME</p>
               <p id="daily-volume"></p>
             </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-3">
-              <p>MARKET CAP:</p>
+            <span class="flex justify-between bg-green-100 pl-2 mr-2 mt-3">
+              <p class="font-medium">MARKET CAP:</p>
               <p id="market-cap"></p>
             </span>
+            <!-- Area for search history  -->
+            <h3 class="mt-16 font-medium font-sans text-xl">Search History:</h3> 
+            <div id="search-history" class=" flex justify-start mt-1 mb-5 text-base">
+            </div>
+            <button id="history-clear" class="mb-2 border p-1 text-md font-bold rounded shadow-lg">Clear History</button>
           </div>
-          <!-- COPY OF CODE FOR SEARCH DATA (THIS IS SET TO  HIDDEN BY DEFAULT)-->
-          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 rounded border-2 hidden">
-            <p id="logo" class="mb-2 font-bold text-center">ETHERIUM CURRENT DATA:</p>
-            <span class="flex justify-between bg-green-50  pl-2 mt-3">
-              <p>OPEN PRICE</p> 
-              <p id="open-price" ></p>
-            </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-3">
-              <p> PRICE: </p>
-              <p id="current-price"></p>
-            </span>
-            <span class="flex justify-between bg-green-50 pl-2 mt-3">
-              <p>PRICE CHANGE 24-HR:</p>
-              <p id="price-chng-24"></p>
-            </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-2">
-              <p>PRICE CHANGE 1-HR</p>
-              <p id="price-chng-1"></p>
-            </span>
-            <span class="flex justify-between bg-green-50 pl-2 mt-3">
-              <p>DAILY HIGH:</p>
-              <p id="day-high"></p>
-            </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-3">
-              <p>DAILY LOW :</p>
-              <p id="day-low"></p>
-            </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-3">
-              <p>VOLUME: </p>
-              <p id="volume"></p>
-            </span>
-            <span class="flex justify-between bg-green-50 pl-2 mt-3">
-              <p>DAILY VOLUME</p>
-              <p id="daily-volume"></p>
-            </span>
-            <span class="flex justify-between bg-green-100 pl-2 mt-3">
-              <p>MARKET CAP:</p>
-              <p id="market-cap"></p>
-            </span>
-          </div>
-          <!-- END OF COPY -->
-
-
           <!-- news feed for search area -->
-          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4">
+          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4">
               <h2 id="news-title" class="mb-4 font-bold ">Top News on Bitcoin</h2>
               <img id="news-img" src="./assets/images/5_sk-how-to-send-new.png" alt="" class="h-20 w-72">
               <div id="news-txt">
