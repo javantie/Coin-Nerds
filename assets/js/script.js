@@ -127,12 +127,16 @@ var getgiphy = function (tick) {
       "&api_key=s5QeHwd3F0ZSScsfU69FCbZv9Untc0mC"
   )
     .then(function (response) {
-      return response.json();
+      if(response.ok){
+        return response.json();
+      }
     })
     .then(function (response) {
-      var num = Math.floor(Math.random() * 10) + 1;
+      var responseData = response.data;
+      var num = Math.floor(Math.random() * responseData.length);
       var img = document.createElement("img");
-      img.setAttribute("src", response.data[num].images.fixed_height.url);
+      console.log(num, response.data)
+      img.setAttribute("src", responseData[num].images.fixed_height.url);
       img.setAttribute("class", "h-32 w-60 mr-4 rounded-tr-xl rounded-bl-xl");
       gifHolder.append(img);
     });
@@ -145,7 +149,8 @@ fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     return response.json();
   })
   .then(function (data) {
-    var num = Math.floor(Math.random() * 10) + 1;
+    var dataObj = data.Data;
+    var num = Math.floor(Math.random() * dataObj.length);
     var newsTitleEl = document.getElementById("news-title");
     var newsImgEl = document.getElementById("news-img");
     var newsTxtEl = document.getElementById("news-txt");
@@ -369,6 +374,7 @@ loadPage();
 ////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
 searchButtonEl.addEventListener("click", function (event) {
   var tick = searchInput.value;
+  searchInput.value=""
   event.preventDefault();
   if (tick === "") {
     var msgTitle = "Input Required!"
