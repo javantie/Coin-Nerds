@@ -36,13 +36,13 @@ var searchIndividualTickerSymbol = function (tSymbol) {
     .then(function (data) {
       //console.log("then", data);
       var displayObj = data.DISPLAY;
-      // console.log(displayObj)
+      console.log(displayObj[tSymbol].USD.IMAGEURL)
       // console.log(tSymbol)
-
+    
       currentPriceEl.textContent = displayObj[tSymbol].USD.PRICE;
       marketCapEl.textContent = displayObj[tSymbol].USD.MKTCAP;
       priceChange24El.textContent =
-        displayObj[tSymbol].USD.CHANGEPCT24HOUR + "%";
+      displayObj[tSymbol].USD.CHANGEPCT24HOUR + "%";
       priceChange1El.textContent = displayObj[tSymbol].USD.CHANGEPCTHOUR + "%";
       volumeEl.textContent = displayObj[tSymbol].USD.VOLUMEDAYTO;
       dailyvolumeEl.textContent = displayObj[tSymbol].USD.VOLUMEDAYTO;
@@ -50,6 +50,13 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       dayHighEl.textContent = displayObj[tSymbol].USD.HIGHDAY;
       dayLowEl.textContent = displayObj[tSymbol].USD.LOWDAY;
       searchTitleEl.textContent = "(" + tSymbol + "/USD)";
+      var im = document.getElementById("tic-img")
+      im.setAttribute("src", "file:///C:/Users/Owner/OneDrive/Desktop/btc img.jpg")
+      im.setAttribute("src", "file:///C:/Users/Owner/OneDrive/Desktop/btc img.jpg")
+      im.setAttribute("class", "h-10 w-15 rounded text-center")
+     
+      
+
 
       if (displayObj[tSymbol].USD.CHANGEPCT24HOUR > 0) {
         priceChange24El.setAttribute("class", "bg-green-400");
@@ -328,14 +335,17 @@ searchButtonEl.addEventListener("click", function (event) {
   }
   saveSeachData(tick);
 });
+var counter = 0;
 
 //Save data to local storage
 var oldData = [];
 var saveSeachData = function (tick) {
   newData = {
     text: tick,
+    id: counter
   };
   oldData.push(newData);
+  counter++
   localStorage.setItem("search", JSON.stringify(oldData));
 };
 
@@ -343,6 +353,7 @@ var saveSeachData = function (tick) {
 var loadData = function () {
   oldData = JSON.parse(localStorage.getItem("search")) || [];
   //console.log(oldData);
+  counter = oldData.length
   for (let i = 0; i < oldData.length; i++) {
     search = document.createElement("p");
     search.setAttribute(
