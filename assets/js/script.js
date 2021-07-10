@@ -1,5 +1,6 @@
 var top5ContainerEl = document.querySelector(".top-five-container");
 var btnTwitterFeedEl = document.querySelector(".btc-twitter-feed-section");
+var btnTwitterFeedHeadEl = document.querySelector(".btc-twitter-feed-header");
 var logoDisplayEl = document.getElementById("logo");
 var currentPriceEl = document.getElementById("current-price");
 var marketCapEl = document.getElementById("market-cap");
@@ -201,11 +202,17 @@ var fetchTwitterFeedNewsData = function () {
 
   fetch(coinPaprikaURL)
     .then(function (response) {
-      return response.json();
+      if(response.ok) {
+       return response.json();
+      }
     })
     .then(function (data) {
-      buildBtcTwitterFeedSection(data);
-    });
+     buildBtcTwitterFeedSection(data);
+    })
+    .catch(function(error){
+      btnTwitterFeedHeadEl.classList.add("hidden");
+
+    })
 };
 
 /************************************************************************
@@ -274,6 +281,10 @@ var formatNumbers = function (num) {
 var buildTopSection = async function (data) {
   var dataArray = data.Data;
 
+  if(!dataArray){
+    return;
+  }
+
   for (const [index, item] of dataArray.entries()) {
     var coinId = dataArray[index].CoinInfo.Id;
     var tickerName = dataArray[index].CoinInfo.Name;
@@ -330,10 +341,15 @@ var fetchCryptoCompareTopList = function () {
 
   fetch(apiURL)
     .then(function (response) {
-      return response.json();
+      if(response.ok){
+        return response.json();
+      }
     })
     .then(function (data) {
       buildTopSection(data);
+    })
+    .catch(function(error) {
+      return;
     });
 };
 
