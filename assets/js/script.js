@@ -51,7 +51,8 @@ var searchIndividualTickerSymbol = function (tSymbol) {
 
   fetch(apiURL + API_Key)
     .then(function (response) {
-      return response.json();
+      if(response.ok)
+        return response.json();
     })
     .then(function (data) {
     
@@ -111,7 +112,12 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       } else {
         return;
       }
-    });
+    })
+    .catch(function(error){
+       var title = "Whoops!"
+       var msg = "Unable to connect to CryptoCompareAPI to complete you search"
+       displayMessageModal(title, msg)
+    })
 };
 var getgiphy = function (tick) {
   fetch(
