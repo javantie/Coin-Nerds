@@ -19,15 +19,30 @@ var gifHolder = document.getElementById("gifholder");
 var clearBtnEl = document.getElementById("history-clear");
 var SearchHistoryEl = document.getElementById("search-history");
 var searchTitleEl = document.getElementById("search-title");
+var searchErrMsgEl = document.getElementById("error-msg")
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
   "&api_key=47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 
+var displaySearchErrorMessage = function(message) {
+  searchErrMsgEl.textContent= message;
+}
+
 ///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----/////
 var searchIndividualTickerSymbol = function (tSymbol) {
-  var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`;
+  console.log(searchErrMsgEl, tSymbol )
+  searchErrMsgEl.textContent = ""
+  if(!tSymbol){
+    var msg = "Please input a valid ticker symbol to search!"
+    displaySearchErrorMessage(msg)
+
+  }
+ 
   tSymbol = tSymbol.toUpperCase();
+  var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`;
+  
+
 
   fetch(apiURL + API_Key)
     .then(function (response) {
@@ -320,6 +335,8 @@ searchButtonEl.addEventListener("click", function (event) {
   var tick = searchInput.value;
   event.preventDefault();
   if (tick === "") {
+    var msg = "Please input a valid ticker symbol to search!"
+    displaySearchErrorMessage(msg)
     return;
   } else {
     searchIndividualTickerSymbol(tick);
