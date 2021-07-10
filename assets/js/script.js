@@ -28,7 +28,7 @@ var API_Base =
 var API_Key =
   "&api_key=47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 
-  var displaySearchErrorMessage = function(messageTitle, messageText) {
+  var displayMessageModal = function(messageTitle, messageText) {
     modalMsgTitleEl.textContent=messageTitle;
     modalMsgTextEl.textContent= messageText;
     msgModalEl.classList.remove("hidden");
@@ -37,6 +37,12 @@ var API_Key =
   
 ///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----/////
 var searchIndividualTickerSymbol = function (tSymbol) {
+  var isDefault = false
+
+  if(!tSymbol){
+    tSymbol = "BTC"
+    isDefault = true;
+  }
 
   tSymbol = tSymbol.toUpperCase();
   var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`;
@@ -48,7 +54,18 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       return response.json();
     })
     .then(function (data) {
-      //console.log("then", data);
+    
+      var dataRespObj = data.Response
+      if(dataRespObj){
+        if( dataRespObj.toUpperCase() ==="ERROR"){
+          displayMessageModal("ERROR", data.Message)
+          return;
+        }
+      }
+      //if a default ticker symbol is not provided save the ticker
+      if (!isDefault){
+        saveSeachData(tSymbol);
+      }
       var displayObj = data.DISPLAY;
       console.log(displayObj[tSymbol].USD.IMAGEURL);
       // console.log(tSymbol)
@@ -320,7 +337,7 @@ var fetchCryptoCompareTopList = function () {
  ************************************************************************/
 var loadPage = function () {
   fetchCryptoCompareTopList();
-  searchIndividualTickerSymbol("BTC");
+  searchIndividualTickerSymbol();
   fetchTwitterFeedNewsData();
 };
 
@@ -335,14 +352,14 @@ searchButtonEl.addEventListener("click", function (event) {
     var msgTitle = "Input Required!"
     var msg = "Please input a valid ticker symbol to search!"
     
-    displaySearchErrorMessage(msgTitle, msg)
+    displayMessageModal(msgTitle, msg)
     return;
   } else {
     searchIndividualTickerSymbol(tick);
     gifHolder.innerHTML = "";
     getgiphy(tick);
   }
-  saveSeachData(tick);
+  //saveSeachData(tick);
 });
 var counter = 0;
 
