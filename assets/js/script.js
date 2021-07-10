@@ -1,5 +1,6 @@
 var top5ContainerEl = document.querySelector(".top-five-container");
 var btnTwitterFeedEl = document.querySelector(".btc-twitter-feed-section");
+var btnTwitterFeedHeadEl = document.querySelector(".btc-twitter-feed-header");
 var logoDisplayEl = document.getElementById("logo");
 var currentPriceEl = document.getElementById("current-price");
 var marketCapEl = document.getElementById("market-cap");
@@ -19,22 +20,54 @@ var gifHolder = document.getElementById("gifholder");
 var clearBtnEl = document.getElementById("history-clear");
 var SearchHistoryEl = document.getElementById("search-history");
 var searchTitleEl = document.getElementById("search-title");
+var modalMsgTitleEl = document.getElementById("modal-title");
+var modalMsgTextEl = document.getElementById("modal-msg");
+var btnOKEl = document.querySelector(".btn-ok")
+var msgModalEl = document.querySelector(".msg-modal") 
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
   "&api_key=47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 
+  var displayMessageModal = function(messageTitle, messageText) {
+    modalMsgTitleEl.textContent=messageTitle;
+    modalMsgTextEl.textContent= messageText;
+    msgModalEl.classList.remove("hidden");
+    searchInput.focus();
+  }
+  
 ///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----/////
 var searchIndividualTickerSymbol = function (tSymbol) {
-  var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`;
+  var isDefault = false
+
+  if(!tSymbol){
+    tSymbol = "BTC"
+    isDefault = true;
+  }
+
   tSymbol = tSymbol.toUpperCase();
+  var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`;
+  
+
 
   fetch(apiURL + API_Key)
     .then(function (response) {
-      return response.json();
+      if(response.ok)
+        return response.json();
     })
     .then(function (data) {
-      //console.log("then", data);
+    
+      var dataRespObj = data.Response
+      if(dataRespObj){
+        if( dataRespObj.toUpperCase() ==="ERROR"){
+          displayMessageModal("ERROR", data.Message)
+          return;
+        }
+      }
+      //if a default ticker symbol is not provided save the ticker
+      if (!isDefault){
+        saveSeachData(tSymbol);
+      }
       var displayObj = data.DISPLAY;
       console.log(displayObj[tSymbol].USD.IMAGEURL);
       // console.log(tSymbol)
@@ -80,7 +113,12 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       } else {
         return;
       }
-    });
+    })
+    .catch(function(error){
+       var title = "Whoops!"
+       var msg = "Unable to connect to CryptoCompareAPI to complete you search"
+       displayMessageModal(title, msg)
+    })
 };
 var getgiphy = function (tick) {
   fetch(
@@ -89,12 +127,16 @@ var getgiphy = function (tick) {
       "&api_key=s5QeHwd3F0ZSScsfU69FCbZv9Untc0mC"
   )
     .then(function (response) {
-      return response.json();
+      if(response.ok){
+        return response.json();
+      }
     })
     .then(function (response) {
-      var num = Math.floor(Math.random() * 10) + 1;
+      var responseData = response.data;
+      var num = Math.floor(Math.random() * responseData.length);
       var img = document.createElement("img");
-      img.setAttribute("src", response.data[num].images.fixed_height.url);
+      console.log(num, response.data)
+      img.setAttribute("src", responseData[num].images.fixed_height.url);
       img.setAttribute("class", "h-32 w-60 mr-4 rounded-tr-xl rounded-bl-xl");
       gifHolder.append(img);
     });
@@ -107,7 +149,8 @@ fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     return response.json();
   })
   .then(function (data) {
-    var num = Math.floor(Math.random() * 10) + 1;
+    var dataObj = data.Data;
+    var num = Math.floor(Math.random() * dataObj.length);
     var newsTitleEl = document.getElementById("news-title");
     var newsImgEl = document.getElementById("news-img");
     var newsTxtEl = document.getElementById("news-txt");
@@ -164,11 +207,17 @@ var fetchTwitterFeedNewsData = function () {
 
   fetch(coinPaprikaURL)
     .then(function (response) {
-      return response.json();
+      if(response.ok) {
+       return response.json();
+      }
     })
     .then(function (data) {
-      buildBtcTwitterFeedSection(data);
-    });
+     buildBtcTwitterFeedSection(data);
+    })
+    .catch(function(error){
+      btnTwitterFeedHeadEl.classList.add("hidden");
+
+    })
 };
 
 /************************************************************************
@@ -237,6 +286,10 @@ var formatNumbers = function (num) {
 var buildTopSection = async function (data) {
   var dataArray = data.Data;
 
+  if(!dataArray){
+    return;
+  }
+
   for (const [index, item] of dataArray.entries()) {
     var coinId = dataArray[index].CoinInfo.Id;
     var tickerName = dataArray[index].CoinInfo.Name;
@@ -293,10 +346,15 @@ var fetchCryptoCompareTopList = function () {
 
   fetch(apiURL)
     .then(function (response) {
-      return response.json();
+      if(response.ok){
+        return response.json();
+      }
     })
     .then(function (data) {
       buildTopSection(data);
+    })
+    .catch(function(error) {
+      return;
     });
 };
 
@@ -306,7 +364,7 @@ var fetchCryptoCompareTopList = function () {
  ************************************************************************/
 var loadPage = function () {
   fetchCryptoCompareTopList();
-  searchIndividualTickerSymbol("BTC");
+  searchIndividualTickerSymbol();
   fetchTwitterFeedNewsData();
 };
 
@@ -316,15 +374,20 @@ loadPage();
 ////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
 searchButtonEl.addEventListener("click", function (event) {
   var tick = searchInput.value;
+  searchInput.value=""
   event.preventDefault();
   if (tick === "") {
+    var msgTitle = "Input Required!"
+    var msg = "Please input a valid ticker symbol to search!"
+    
+    displayMessageModal(msgTitle, msg)
     return;
   } else {
     searchIndividualTickerSymbol(tick);
     gifHolder.innerHTML = "";
     getgiphy(tick);
   }
-  saveSeachData(tick);
+  //saveSeachData(tick);
 });
 var counter = 0;
 
@@ -369,4 +432,9 @@ loadData();
 
 clearBtnEl.addEventListener("click", function () {
   localStorage.clear();
+});
+
+btnOKEl.addEventListener("click", function(){
+      msgModalEl.classList.add("hidden");
+
 });
