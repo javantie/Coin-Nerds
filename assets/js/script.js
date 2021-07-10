@@ -36,13 +36,13 @@ var searchIndividualTickerSymbol = function (tSymbol) {
     .then(function (data) {
       //console.log("then", data);
       var displayObj = data.DISPLAY;
-      console.log(displayObj[tSymbol].USD.IMAGEURL)
+      console.log(displayObj[tSymbol].USD.IMAGEURL);
       // console.log(tSymbol)
-    
+
       currentPriceEl.textContent = displayObj[tSymbol].USD.PRICE;
       marketCapEl.textContent = displayObj[tSymbol].USD.MKTCAP;
       priceChange24El.textContent =
-      displayObj[tSymbol].USD.CHANGEPCT24HOUR + "%";
+        displayObj[tSymbol].USD.CHANGEPCT24HOUR + "%";
       priceChange1El.textContent = displayObj[tSymbol].USD.CHANGEPCTHOUR + "%";
       volumeEl.textContent = displayObj[tSymbol].USD.VOLUMEDAYTO;
       dailyvolumeEl.textContent = displayObj[tSymbol].USD.VOLUMEDAYTO;
@@ -50,14 +50,12 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       dayHighEl.textContent = displayObj[tSymbol].USD.HIGHDAY;
       dayLowEl.textContent = displayObj[tSymbol].USD.LOWDAY;
       searchTitleEl.textContent = "(" + tSymbol + "/USD)";
-      var im = document.getElementById("tic-img")
-      im.setAttribute("src", "file:///C:/Users/Owner/OneDrive/Desktop/btc img.jpg")
-      im.setAttribute("src", "file:///C:/Users/Owner/OneDrive/Desktop/btc img.jpg")
-      im.setAttribute("class", "h-10 w-15 rounded text-center")
-     
-      
-
-
+      var im = document.getElementById("tic-img");
+      im.setAttribute(
+        "src",
+        "file:///C:/Users/Owner/OneDrive/Desktop/btc img.jpg"
+      );
+      im.setAttribute("class", "h-10 w-15 rounded text-center");
       if (displayObj[tSymbol].USD.CHANGEPCT24HOUR > 0) {
         priceChange24El.setAttribute("class", "bg-green-400");
       } else if (displayObj[tSymbol].USD.CHANGEPCT24HOUR < 0) {
@@ -82,17 +80,7 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       } else {
         return;
       }
-
-      ////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
-      searchButtonEl.addEventListener("click", function (event) {
-        var tick = searchInput.value;
-        event.preventDefault();
-        if (tick === "") {
-          return;
-        } else {
-        }
-      });
-    });
+  });
 };
 var getgiphy = function (tick) {
   fetch(
@@ -111,7 +99,7 @@ var getgiphy = function (tick) {
       gifHolder.append(img);
     });
 };
-getgiphy("crypto");
+getgiphy("dogecoin");
 
 /////////---------CODE FOR LOADING THE NEWS ON CRYPTO------///////
 fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
@@ -125,7 +113,10 @@ fetch("https://min-api.cryptocompare.com/data/v2/news/?lang=EN")
     var newsTxtEl = document.getElementById("news-txt");
     var category = document.getElementById("category");
     newsImgEl.setAttribute("src", data.Data[num].imageurl);
-    newsImgEl.setAttribute("class", "rounded h-32 w-80 sm:w-full sm:h-40 sm:mb-2");
+    newsImgEl.setAttribute(
+      "class",
+      "rounded h-32 w-80 sm:w-full sm:h-40 sm:mb-2"
+    );
 
     newsTitleEl.textContent = data.Data[num].title;
     newsTxtEl.textContent = data.Data[num].body;
@@ -330,8 +321,8 @@ searchButtonEl.addEventListener("click", function (event) {
     return;
   } else {
     searchIndividualTickerSymbol(tick);
-    getgiphy(tick);
     gifHolder.innerHTML = "";
+    getgiphy(tick);
   }
   saveSeachData(tick);
 });
@@ -342,10 +333,10 @@ var oldData = [];
 var saveSeachData = function (tick) {
   newData = {
     text: tick,
-    id: counter
+    id: counter,
   };
   oldData.push(newData);
-  counter++
+  counter++;
   localStorage.setItem("search", JSON.stringify(oldData));
 };
 
@@ -353,7 +344,7 @@ var saveSeachData = function (tick) {
 var loadData = function () {
   oldData = JSON.parse(localStorage.getItem("search")) || [];
   //console.log(oldData);
-  counter = oldData.length
+  counter = oldData.length;
   for (let i = 0; i < oldData.length; i++) {
     search = document.createElement("p");
     search.setAttribute(
@@ -365,6 +356,15 @@ var loadData = function () {
   }
 };
 loadData();
+
+//////------------EventListener For Making History Searchable-----------------//////
+search.addEventListener("click", function () {
+  tSymbol = oldData[0].text;
+  tSymbol= tSymbol.toUpperCase()
+  searchIndividualTickerSymbol(tSymbol)
+  gifHolder.innerHTML = "";
+  getgiphy(tSymbol)
+});
 
 clearBtnEl.addEventListener("click", function () {
   localStorage.clear();
