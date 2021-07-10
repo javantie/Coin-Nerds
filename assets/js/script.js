@@ -19,26 +19,25 @@ var gifHolder = document.getElementById("gifholder");
 var clearBtnEl = document.getElementById("history-clear");
 var SearchHistoryEl = document.getElementById("search-history");
 var searchTitleEl = document.getElementById("search-title");
-var searchErrMsgEl = document.getElementById("error-msg")
+var modalMsgTitleEl = document.getElementById("modal-title");
+var modalMsgTextEl = document.getElementById("modal-msg");
+var btnOKEl = document.querySelector(".btn-ok")
+var msgModalEl = document.querySelector(".msg-modal") 
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
   "&api_key=47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 
-var displaySearchErrorMessage = function(message) {
-  searchErrMsgEl.textContent= message;
-}
-
+  var displaySearchErrorMessage = function(messageTitle, messageText) {
+    modalMsgTitleEl.textContent=messageTitle;
+    modalMsgTextEl.textContent= messageText;
+    msgModalEl.classList.remove("hidden");
+    searchInput.focus();
+  }
+  
 ///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----/////
 var searchIndividualTickerSymbol = function (tSymbol) {
-  console.log(searchErrMsgEl, tSymbol )
-  searchErrMsgEl.textContent = ""
-  if(!tSymbol){
-    var msg = "Please input a valid ticker symbol to search!"
-    displaySearchErrorMessage(msg)
 
-  }
- 
   tSymbol = tSymbol.toUpperCase();
   var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`;
   
@@ -333,8 +332,10 @@ searchButtonEl.addEventListener("click", function (event) {
   var tick = searchInput.value;
   event.preventDefault();
   if (tick === "") {
+    var msgTitle = "Input Required!"
     var msg = "Please input a valid ticker symbol to search!"
-    displaySearchErrorMessage(msg)
+    
+    displaySearchErrorMessage(msgTitle, msg)
     return;
   } else {
     searchIndividualTickerSymbol(tick);
@@ -386,4 +387,9 @@ loadData();
 
 clearBtnEl.addEventListener("click", function () {
   localStorage.clear();
+});
+
+btnOKEl.addEventListener("click", function(){
+      msgModalEl.classList.add("hidden");
+
 });
