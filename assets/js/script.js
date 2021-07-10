@@ -80,7 +80,7 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       } else {
         return;
       }
-  });
+    });
 };
 var getgiphy = function (tick) {
   fetch(
@@ -357,13 +357,17 @@ var loadData = function () {
 };
 loadData();
 
-//////------------EventListener For Making History Searchable-----------------//////
+
+////------------EventListener For Making History Searchable-----------------//////
 search.addEventListener("click", function () {
-  tSymbol = oldData[0].text;
-  tSymbol= tSymbol.toUpperCase()
-  searchIndividualTickerSymbol(tSymbol)
-  gifHolder.innerHTML = "";
-  getgiphy(tSymbol)
+    tSymbol = oldData[0].text;
+    tSymbol = tSymbol.toUpperCase();
+    tSymbol = oldData[0].text;
+    tSymbol = tSymbol.toUpperCase();
+    searchIndividualTickerSymbol(tSymbol);
+    gifHolder.innerHTML = "";
+    getgiphy(tSymbol);
+    console.log(this);
 });
 
 clearBtnEl.addEventListener("click", function () {
