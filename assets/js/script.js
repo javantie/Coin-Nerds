@@ -53,7 +53,7 @@ var searchIndividualTickerSymbol = function (tSymbol) {
       var im = document.getElementById("tic-img");
       im.setAttribute(
         "src",
-        "file:///C:/Users/Owner/OneDrive/Desktop/btc img.jpg"
+        "https://www.cryptocompare.com" + displayObj[tSymbol].USD.IMAGEURL
       );
       im.setAttribute("class", "h-10 w-15 rounded text-center");
       if (displayObj[tSymbol].USD.CHANGEPCT24HOUR > 0) {
@@ -349,26 +349,23 @@ var loadData = function () {
     search = document.createElement("p");
     search.setAttribute(
       "class",
-      "mx-3 bg-gray-200 px-3 py-1 rounded text-lg cursor-pointer"
+      "mx-3 bg-gray-200 px-3 py-1 rounded text-lg cursor-pointer mt-2"
     );
     search.textContent = oldData[i].text;
     SearchHistoryEl.append(search);
+
+    search.addEventListener("click", function () {
+      tSymbol = this.textContent
+      tSymbol = tSymbol.toUpperCase();
+      searchIndividualTickerSymbol(tSymbol);
+      gifHolder.innerHTML = "";
+      getgiphy(tSymbol);
+      console.log(this.textContent);
+  });
   }
 };
 loadData();
 
-
-////------------EventListener For Making History Searchable-----------------//////
-search.addEventListener("click", function () {
-    tSymbol = oldData[0].text;
-    tSymbol = tSymbol.toUpperCase();
-    tSymbol = oldData[0].text;
-    tSymbol = tSymbol.toUpperCase();
-    searchIndividualTickerSymbol(tSymbol);
-    gifHolder.innerHTML = "";
-    getgiphy(tSymbol);
-    console.log(this);
-});
 
 clearBtnEl.addEventListener("click", function () {
   localStorage.clear();
