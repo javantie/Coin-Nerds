@@ -304,23 +304,23 @@ var buildTopSection = async function (data) {
     var twitterFollowers = twitterFeedData.Data.Twitter.followers;
 
     var cryptoCard = `
-          <div class="crypto-card mt-2 w-72 shadow rounded bg-blue-50 shadow-md rounded-bl-xl flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60"
+          <div class="cursor-pointer crypto-card mt-2 w-72 shadow rounded-bl-3xl rounded-tr-3xl bg-blue-50 shadow-md flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60"
                 data-ticker=${tickerName}>
-            <p class="ticker-name w-72 shadow font-semibold text-blue-600 text-center bg-blue-200 rounded-tr-xl md:w-80">
+            <p class="ticker-name w-72 shadow font-semibold text-blue-600 text-center bg-blue-200 md:w-80 rounded-tr-3xl">
                 ${tickerName}/${toSymbol}
             </p>
             <div class= "card-txt w-72 md:w-80 py-2 pl-4 font-light">
-              <p class="font-normal bg-green-100 mr-3"><span class = "label mr-1 font-semibold">Price:</span> ${convertToUSDollars(
+              <p class=" font-normal bg-gray-100 mr-3"><span class = "label mr-1 font-semibold">Price:</span> ${convertToUSDollars(
                 price
               )}</p>
-              <p class=" font-normal bg-green-50 mr-3"><span class = "label mr-1  font-semibold">Market Cap:</span> ${marketCap}</p>
-              <p class="font-normal bg-green-100 mr-3"><span class = "label mr-1  font-semibold">24-HR Price Change:</span> ${convertToPrecent(
+              <p class=" font-normal bg-gray-50 mr-3"><span class = "label mr-1  font-semibold">Market Cap:</span> ${marketCap}</p>
+              <p class="font-normal bg-gray-100 mr-3"><span class = "label mr-1  font-semibold">24-HR Price Change:</span> ${convertToPrecent(
                 change24HourPct
               )}</p>
-              <p class="font-normal bg-green-50 mr-3"><span class = "label mr-1  font-semibold">1-HR Price Change:</span> ${convertToPrecent(
+              <p class="font-normal bg-gray-50 mr-3"><span class = "label mr-1  font-semibold">1-HR Price Change:</span> ${convertToPrecent(
                 changeHourPct
               )}</p>
-              <p class="font-normal bg-green-100 mr-3"><span class = "label mr-1  font-semibold">Followers:</span> ${formatNumbers(
+              <p class="font-normal bg-gray-100 mr-3"><span class = "label mr-1  font-semibold">Followers:</span> ${formatNumbers(
                 twitterFollowers
               )}</p>
             </div>
