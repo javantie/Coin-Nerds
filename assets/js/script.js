@@ -24,6 +24,7 @@ var modalMsgTitleEl = document.getElementById("modal-title");
 var modalMsgTextEl = document.getElementById("modal-msg");
 var btnOKEl = document.querySelector(".btn-ok")
 var msgModalEl = document.querySelector(".msg-modal") 
+var exchangeHolderEl = document.getElementById("exchange-holder")
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
@@ -451,14 +452,6 @@ btnOKEl.addEventListener("click", function(){
 
 });
 
-
-var exchNameEl = document.getElementById("exch-name")
-var locationEl = document.getElementById("location")
-var scoreEl = document.getElementById("score")
-var rankingEl = document.getElementById("ranking")
-var dateEstEl = document.getElementById("date-est")
-var exchLogoEl =document.getElementById("exchange-logo")
-var exchangeHolderEl = document.getElementById("exchange-holder")
 
 fetch("https://api.coingecko.com/api/v3/exchanges")
   .then(function (response) {
