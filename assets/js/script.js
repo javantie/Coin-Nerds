@@ -182,7 +182,7 @@ var buildBtcTwitterFeedSection = function (data) {
     var likeCount = data[i].like_count;
 
     var twitterCard = `
-          <div class="twitter-card m-4 px-4 w-auto shadow pl-4 py-2 rounded bg-gray-50">
+          <div class="twitter-card m-4 px-4 w-auto shadow pl-4 py-2 rounded-2xl bg-opacity-70 bg-gray-50">
             <p class="username font-medium text-blue-600">${username}</p>
             <p class="status">${status}</p>
             <p class="retweet-count font-medium pt-2 text-blue-600"> Retweets: ${retweetCount}</p>
@@ -305,23 +305,23 @@ var buildTopSection = async function (data) {
     var twitterFollowers = twitterFeedData.Data.Twitter.followers;
 
     var cryptoCard = `
-          <div class="cursor-pointer crypto-card mt-2 w-72 shadow rounded-bl-3xl rounded-tr-3xl bg-blue-50 shadow-md flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60"
+          <div class="cursor-pointer crypto-card mt-2 w-72 bg-opacity-80 shadow rounded-bl-3xl rounded-tr-3xl bg-blue-50 shadow-md flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60"
                 data-ticker=${tickerName}>
-            <p class="ticker-name w-72 shadow font-semibold text-blue-600 text-center bg-blue-200 md:w-80 rounded-tr-3xl">
+            <p class="ticker-name w-72 shadow font-semibold text-blue-600 bg-opacity-80  text-center bg-blue-200 md:w-80 rounded-tr-3xl">
                 ${tickerName}/${toSymbol}
             </p>
-            <div class= "card-txt w-72 md:w-80 py-2 pl-4 font-light">
-              <p class=" font-normal bg-gray-100 mr-3"><span class = "label mr-1 font-semibold">Price:</span> ${convertToUSDollars(
+            <div class= " rounded-bl-3xl card-txt w-72 md:w-80 py-2 pl-4 font-light bg-gray-100 bg-opacity-50">
+              <p class=" font-normal bg-red-100 mr-3"><span class = "label mr-1 font-semibold">Price:</span> ${convertToUSDollars(
                 price
               )}</p>
-              <p class=" font-normal bg-gray-50 mr-3"><span class = "label mr-1  font-semibold">Market Cap:</span> ${marketCap}</p>
-              <p class="font-normal bg-gray-100 mr-3"><span class = "label mr-1  font-semibold">24-HR Price Change:</span> ${convertToPrecent(
+              <p class=" font-normal bg-red-50 mr-3"><span class = "label mr-1  font-semibold">Market Cap:</span> ${marketCap}</p>
+              <p class="font-normal bg-red-100 mr-3"><span class = "label mr-1  font-semibold">24-HR Price Change:</span> ${convertToPrecent(
                 change24HourPct
               )}</p>
-              <p class="font-normal bg-gray-50 mr-3"><span class = "label mr-1  font-semibold">1-HR Price Change:</span> ${convertToPrecent(
+              <p class="font-norma bg-red-50 mr-3"><span class = "label mr-1  font-semibold">1-HR Price Change:</span> ${convertToPrecent(
                 changeHourPct
               )}</p>
-              <p class="font-normal bg-gray-100 mr-3"><span class = "label mr-1  font-semibold">Followers:</span> ${formatNumbers(
+              <p class="font-normal bg-red-100 mr-3"><span class = "label mr-1  font-semibold">Followers:</span> ${formatNumbers(
                 twitterFollowers
               )}</p>
             </div>
@@ -459,29 +459,30 @@ fetch("https://api.coingecko.com/api/v3/exchanges")
   })
   .then(function (data) {
     console.log(data[0])
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 3; i++) {
       var exchangeCard = `<div id="exchane-card" class="lg:ml-3 border-1 xl:mr-4 xl:w-full shadow px-2 rounded mb-4">
       <img class="pt-1" id="exchange-logo" src="${data[i].image}" alt="exchange iamge">
       <span class="flex">
-        <p class="font-semibold pr-2 font-serif">Name:</p>
+        <p class="font-semibold pr-1 font-serif">Name:</p>
         <p id="exch-name">${data[i].name}</p>
       </span>
       <span class="flex">
-        <p class="font-semibold pr-2 font-serif">Location:</p>
+        <p class="font-semibold pr-1 font-serif">Location:</p>
         <p id="location">${data[i].country}</p>
       </span>
       <span class="flex">
-        <p class="font-semibold pr-2 font-serif">Trust Score:</p>
-        <p id="score">${data[i].trust_score}</p>
+        <p class="font-semibold pr-1 font-serif">Trust Score:</p>
+        <p id="score">${data[i].trust_score}/10</p>
       </span>
       <span class="flex">
-        <p class="font-semibold pr-2 font-serif">Ranking:</p>
-        <p id="ranking">#${data[i].trust_score_rank}</p>
+        <p class="font-semibold pr-1 font-serif">Ranking:</p>
+        <p id="ranking">#${data[i].trust_score_rank}/10</p>
       </span>
       <span class="flex">
-        <p class="font-semibold pr-2 font-serif">Established:</p>
+        <p class="font-semibold pr-1 font-serif">Established:</p>
         <p id="date-est">${data[i].year_established}</p>
       </span>
+      <a target="blank" href="${data[i].url}"><p class="text-blue-700 pt-4 font-semibold">Click Here</p></a>
     </div>`;
     exchangeHolderEl.innerHTML += exchangeCard;
      

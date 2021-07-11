@@ -29,23 +29,23 @@
       "
     >
       <div>
-        <span class="sm:text-3xl font-bold sm:text-1xl text-white lg-logo pl-4">Coin Nerds</span>
+        <span class="sm:text-3xl font-bold sm:text-1xl text-lg text-white lg-logo pl-2">Coin Nerds</span>
       </div>
       <!-- navigation bar -->
       <nav class="sm:mr-4">
-        <ul class="flex justify-between px-4 sm:px-2 ">
+        <ul class="sm:flex sm:justify-between sm:px-4 sm:px-2">
           <a target="blank" href="https://www.nerdwallet.com/article/investing/cryptocurrency-7-things-to-know">
-          <li class="sm:px-2  text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold ">
+          <li class="sm:px-2 pb-1 text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold ">
             Learn Crypto
           </li>
           </a>
           <a target="blank" href="https://cointelegraph.com/tags/bitcoin">
-          <li class=" sm:px-2 text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold">
+          <li class=" sm:px-2 pb-1  text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold">
             Bitcoin News
           </li>
         </a>
         <a href="#what-is-crypto">
-          <li class="sm:px-2 text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold">
+          <li class="sm:px-2 pb-1 text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold">
             What is Crypto
           </li>
           </a>
@@ -71,31 +71,26 @@
       <br />
       <!-- main section for data -->
       <section class="sm:flex justify-between font-sans sm:flex-col-reverse sm:text-center lg:flex-row lg:flex-wrap lg:pl-16 xl:flex-nowrap">
-        <aside id="what-is-crypto" class="xl:justify-start sm:w-full px-4 lg:text-left xl:w-7/12 xl:mr-4 lg:flex-col xl:flex-col flex flex-col sm:flex-row xl:flex-col sm:justify-between">
-            <div class="pr-3 sm:w-7/12 xl:w-full lg:w-full lg:mb-2">
-             <h2 class="font-bold text-lg "> What is Blockchain?</h2>
-            <p>
-            The growing popularity of cryptocurrencies has aroused mainstream
-            interest in blockchain technologies and their possibilities.
-            Increasingly, blockchain is used as a generic term that most people
-            associate with Bitcoin, the cryptocurrency created using the
-            technology. The potential and scope of the application of
-            decentralized protocols have already become so much broader. The
-            Bitcoin blockchain is a global distributed ledger consisting of data
-            blocks sequentially linked in a chain. Each block contains
-            information about the preceding block. The data of blocks is copied
-            and stored on different Bitcoin mining nodes without being bound to
-            one specific server, making the substitution of records impossible.
-            A permanently locked set of rules or “Protocols” governs the flow of
-            data through the distributed network of nodes.
-            </p>
+        <aside id="what-is-crypto" class=" xl:justify-start sm:w-full px-4 lg:text-left xl:w-7/12 xl:mr-4 lg:flex-col xl:flex-col flex flex-col sm:flex-row xl:flex-col sm:justify-between">
+            <div class="sm:w-7/12 xl:w-full lg:w-full lg:mb-2">
+              <div id="what-is-blockchain " class="bg-opacity-50  bg-gray-50 p-4 m-auto mb-2 rounded sm:w-11/12 lg:4/5 sm:place-self-center lg:place-self-auto">
+                <h2 class="mb-2 font-medium font-serif text-xl text-center">WHAT IS BLOCKCHAIN?</h2>
+                <p class="">
+                  TThe growing popularity of cryptocurrencies has aroused mainstream interest in blockchain technologies and their possibilities. 
+                  Increasingly, blockchain is used as a generic term that most people associate with Bitcoin, the cryptocurrency created using the technology. The potential and scope of the application of decentralized protocols have already become so much broader. 
+                  The Bitcoin blockchain is a global distributed ledger consisting of data blocks sequentially linked in a chain. Each block contains information about the preceding block. The data of blocks is copied and stored on different Bitcoin mining nodes without being bound to one specific server, making the substitution of records impossible. 
+                  A permanently locked set of rules or “Protocols” governs the flow of data through the distributed network of nodes. ...
+                  <a href="https://coingeek.com/bitcoin101/what-is-blockchain/" class="text-blue-500 underline">read more</a>
+                </p>
+              </div>
           </div>
-          <div id="exchange-holder" class="flex flex-col lg:w-4/12 xl:flex-row lg:flex-row lg:mt-4">
-            <h2 class="mt-2 font-bold text-lg xl:mt-4 mb-2">Top Crypto Exchange:</h2>
+          <!-- Section for exchange informatiob -->
+          <div id="exchange-holder" class="flex bg-opacity-50 flex-col bg-gray-50 rounded xl:flex-row p-2 lg:flex-row lg:mt-4">
+            <h2 class="mt-2 font-bold text-lg xl:mt-4 mb-2">Top Crypto Exchanges:</h2>
           </div>
         </aside>
         <br />
-        <section id="search-area" class=" sm:w-11/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl sm:w-11/12 sm:place-self-center lg:place-self-auto lg:w-full lg:mr-12 lg:mt-5 ">
+        <section id="search-area" class=" sm:w-11/12 bg-blue-50 bg-opacity-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl sm:w-11/12 sm:place-self-center lg:place-self-auto lg:w-full lg:mr-12 lg:mt-5 ">
           <div id="searh-bar" class=" flex justify-between">
             <form class="py-2">
               <label  for="input" class="font-bold cryptoinsearch text-2xl font-serif">Search Crypto Ticker (ex:BTC)</label><br/>
@@ -107,7 +102,7 @@
             </div>
           </div>
           <div id="data-container" class=" lg:w-full flex mr-4 flex-col items-center sm:flex justify-between sm:flex-col lg:mr-3 xl:flex-row">
-          <div id="data-display" class=" bg-gray-50 w-4/5 sm:w-96 mt-4 pl-4 pr-4 rounded border-2 mb-4 sm:w-full xl:flex-nowrap lg:mr-6 xl:w-7/12">
+          <div id="data-display" class=" bg-opacity-70 bg-gray-50 w-4/5 sm:w-96 mt-4 pl-4 pr-4 rounded border-2 mb-4 sm:w-full xl:flex-nowrap lg:mr-6 xl:w-7/12">
           <span class="mb-2 font-bold text-xl"> 
             <p id="search-title" class="font-medium font-serif" >(BTC/USD)
             </p>
@@ -156,7 +151,7 @@
             <button id="history-clear" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400 mb-2">Clear History</button>
           </div>
           <!-- news feed for search area -->
-          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4 sm:w-full pr-2 xl:w-60">
+          <div id="top-news" class="w-72 bg-opacity-70  bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4 sm:w-full pr-2 xl:w-60">
             <h2 class="mb-5 mt-1 text-md font-thin text-left"> Latest Crypto Market News:</h2>  
             <h2 id="news-title" class="mb-4 font-bold ">Top News on Bitcoin</h2>
               <img id="news-img" src="./assets/images/5_sk-how-to-send-new.png" alt="" class="h-20 w-72 sm:text-center">
@@ -175,7 +170,6 @@
         >Bitcoin Twitter Feed</span
       >
       <section class="flex-col sm:flex-wrap lg:flex-nowrap btc-twitter-feed-section flex justify-between px-4 mt-3">
-       
         </section>
       <br />
     </main>
@@ -215,3 +209,4 @@
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
+
