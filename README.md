@@ -31,7 +31,7 @@ Our site provides vital information to those who would like to invest in cryptoc
 
 ----
 ## Screenshot
-![Coin Nerd Web App](/assets/images/webapp-img.png)
+![Coin Nerd Web App](assets/images/webapp-img.PNG)
 
 
 
