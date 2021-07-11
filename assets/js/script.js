@@ -117,7 +117,7 @@ var searchIndividualTickerSymbol = function (tSymbol) {
 };
 var getgiphy = function (tick) {
   fetch(
-    "https:api.giphy.com/v1/gifs/search?q=" +
+    "https://api.giphy.com/v1/gifs/search?q=" +
       tick +
       "&api_key=s5QeHwd3F0ZSScsfU69FCbZv9Untc0mC"
   )
@@ -131,6 +131,7 @@ var getgiphy = function (tick) {
       var num = Math.floor(Math.random() * responseData.length);
       var img = document.createElement("img");
       img.setAttribute("src", responseData[num].images.fixed_height.url);
+      console.log(responseData[num].images.fixed_height.url)
       img.setAttribute("class", "h-32 w-60 mr-4 rounded-tr-3xl rounded-bl-3xl");
       gifHolder.append(img);
     });
