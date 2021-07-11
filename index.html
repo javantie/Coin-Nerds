@@ -15,7 +15,7 @@
     <!-- header -->
     <header
       class="
-        h-14
+        sm:h-14
         pt-3
         bg-gradient-to-r
         from-blue-400
@@ -29,23 +29,23 @@
       "
     >
       <div>
-        <span class="sm:text-2xl font-bold text-3xl text-white lg-logo pl-4">Coin Nerds</span>
+        <span class="sm:text-3xl font-bold sm:text-1xl text-white lg-logo pl-4">Coin Nerds</span>
       </div>
       <!-- navigation bar -->
-      <nav>
-        <ul class="flex justify-between px-4">
-          <a href="#">
-          <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer ">
+      <nav class="sm:mr-4">
+        <ul class="flex justify-between px-4 sm:px-2 ">
+          <a target="blank" href="https://www.nerdwallet.com/article/investing/cryptocurrency-7-things-to-know">
+          <li class="sm:px-2  text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold ">
             Learn Crypto
           </li>
           </a>
-          <a href="#">
-          <li class="px-4 text-lg text-blue-50 mr-2 rounded-3xl font-medium cursor-pointer">
+          <a target="blank" href="https://cointelegraph.com/tags/bitcoin">
+          <li class=" sm:px-2 text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold">
             Bitcoin News
           </li>
         </a>
         <a href="#what-is-crypto">
-          <li class="px-4 text-lg text-blue-50 rounded-3xl font-medium cursor-pointer">
+          <li class="sm:px-2 text-xs sm:px-4 font-serif sm:text-lg text-blue-50 mr-2 rounded-3xl sm:font-medium cursor-pointer md:font-semibold">
             What is Crypto
           </li>
           </a>
@@ -53,26 +53,25 @@
       </nav>
     </header>
     <!-- jumbotron -->
-    <section id="jumbotron" class="pt-36 pl-4 h-80 text-white font-serif">
-      <span class="font-bold text-3xl"
-        >Live cryptocurrecnty prices for money movers and makers</span
+    <section id="jumbotron" class="  pt-16 sm:pt-36 pl-4 h-44 sm:h-80 text-white">
+      <span class="font-bold sm:text-3xl text-1xl font-serif"
+        >Live cryptocurrency prices for money movers and makers</span
       >
-      <p>
+      <p class="text-sm font-thin font-sans">
         Check the latest rates before you buy. The table below shows how
         different cryptocurrencies are performing in real-time.
       </p>
     </section>
     <!-- Main section -->
-    <main class="">
-      <!-- newfeed section -->
-      <section class=" top-five-container flex justify-between px-4 mt-4">
+    <main>
+      <!-- Crypto Feed Section -->
+      <section class=" flex flex-col items-center mt-6 top-five-container sm:flex sm:flex-row sm:flex-wrap sm:justify-between sm:px-4 sm:mt-4 lg:flex-nowrap">
 
       </section>
       <br />
       <!-- main section for data -->
-
-      <section class="flex justify-between font-sans sm:flex-col-reverse sm:text-center lg:flex-row lg:text-left">
-        <aside id="what-is-crypto " class="sm:w-full lg:w-4/12 pl-4">
+      <section class="sm:flex justify-between font-sans sm:flex-col-reverse sm:text-center lg:flex-row lg:flex-wrap lg:pl-16 xl:flex-nowrap">
+        <aside id="what-is-crypto" class="sm:w-full pl-2 lg:text-left xl:w-7/12 xl:mr-4">
           <h2>WHAT IS BLOCKCHAIN?</h2>
           <p>
             The growing popularity of cryptocurrencies has aroused mainstream
@@ -91,20 +90,25 @@
           </p>
         </aside>
         <br />
-        <section id="search-area" class="w-7/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl sm:w-11/12 sm:place-self-center lg:place-self-auto lg:w-7/12">
+        <section id="search-area" class=" sm:w-11/12 bg-blue-50 rounded-lg pl-6 pt-4 mr-4 shadow-2xl sm:w-11/12 lg:w-11/12 sm:place-self-center lg:place-self-auto lg:w-7/12 lg:mt-5 ">
           <div id="searh-bar" class=" flex justify-between">
             <form class="py-2">
-              <label  for="input" class="font-bold cryptoinsearch text-2xl">Search Crypto</label><br/>
-              <input id="input-area" type="text" placeholder=" ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
+              <label  for="input" class="font-bold cryptoinsearch text-2xl font-serif">Search Crypto Ticker (ex:BTC)</label><br/>
+              <input id="input-area" type="text" onfocus="this.value=''" placeholder=" ex: BTC" class=" rounded outline-none mt-2 border-t-2" /><br>
               <button id="search-btn" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400">Search</button>
             </form>
+            <!-- <p id = "error-msg" class="py-2"></p> -->
             <div id="gifholder" class="h-32">
             </div>
           </div>
-          <div id="data-container" class="flex justify-between">
-          <div id="data-display" class=" bg-gray-50 w-96 mt-4 pl-4 pr-4 rounded border-2 mb-4">
-            <p id="logo" class="mb-2 font-bold text-xl text-center">(BTC/USD)</p>
-            <span class="flex justify-between bg-green-50 mr-2 pl-2 mt-3">
+          <div id="data-container" class=" flex mr-4 flex-col items-center sm:flex justify-between sm:flex-col lg:mr-3 xl:flex-row">
+          <div id="data-display" class=" bg-gray-50 w-4/5 sm:w-96 mt-4 pl-4 pr-4 rounded border-2 mb-4 sm:w-full xl:flex-nowrap xl:w-7/12">
+          <span class="mb-2 font-bold text-xl"> 
+            <p id="search-title" class="font-medium font-serif" >(BTC/USD)
+            </p>
+            <img id="tic-img"  alt="ticker image">
+          </span>
+            <span class="flex justify-between bg-green-50 mr-2 pl-2 mt-3 w-full">
               <p class="font-medium">OPEN PRICE</p> 
               <p id="open-price" ></p>
             </span>
@@ -142,18 +146,19 @@
             </span>
             <!-- Area for search history  -->
             <h3 class="mt-16 font-medium font-sans text-xl">Search History:</h3> 
-            <div id="search-history" class=" flex justify-start mt-1 mb-5 text-base">
+            <div id="search-history" class=" flex flex-wrap mt-1 mb-5 text-base">
             </div>
-            <button id="history-clear" class="mb-2 border p-1 text-md font-bold rounded shadow-lg">Clear History</button>
+            <button id="history-clear" class="mt-2 bg-blue-500 py-1 text-white px-4 rounded-md font-bold shadow hover:bg-blue-400 mb-2">Clear History</button>
           </div>
           <!-- news feed for search area -->
-          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4">
-              <h2 id="news-title" class="mb-4 font-bold ">Top News on Bitcoin</h2>
-              <img id="news-img" src="./assets/images/5_sk-how-to-send-new.png" alt="" class="h-20 w-72">
+          <div id="top-news" class="w-72 bg-gray-50 mt-4 pl-2 rounded mr-4 mb-4 sm:w-full pr-2 xl:w-60">
+            <h2 class="mb-5 mt-1 text-md font-thin text-left"> Latest Crypto Market News:</h2>  
+            <h2 id="news-title" class="mb-4 font-bold ">Top News on Bitcoin</h2>
+              <img id="news-img" src="./assets/images/5_sk-how-to-send-new.png" alt="" class="h-20 w-72 sm:text-center">
               <div id="news-txt">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, fugiat fugit. Fuga commodi natus ad. Eius tempore ducimus magni vero nobis facilis, quia iste suscipit.</p>
               </div>
-              <p id="category" class="pt-2 font-bold">Coin: BTC</p>
+              <p id="category" class="pt-2 font-bold sm:text-left">Coin: BTC</p>
             </div>
           </div>
           </div>
@@ -161,15 +166,47 @@
       </section>
       <br />
       <!-- twitter social feed block -->
-      <span class="font-bold text-3xl pl-4 text-blue-800"
+      <span class="btc-twitter-feed-header font-bold text-3xl pl-4 text-blue-800 ml-3 sm:mt-4 font-serif"
         >Bitcoin Twitter Feed</span
       >
-      <section class="sm:flex-wrap lg:flex-nowrap btc-twitter-feed-section flex justify-between px-4 mt-4">
-        
+      <section class="flex-col sm:flex-wrap lg:flex-nowrap btc-twitter-feed-section flex justify-between px-4 mt-3">
        
         </section>
       <br />
     </main>
+
+    <!-- Code Snippet used from Tailwind Modal Implementation Example-->
+<div class="hidden msg-modal fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <!--Background overlay, show/hide based on modal state. -->
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="false"></div>
+
+    <!-- This element is to trick the browser into centering the modal contents. -->
+    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+    <div class=" inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+        <div class="sm:flex sm:items-start">
+          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                   Modal Title
+            </h3>
+            <div class="mt-2">
+              <p id="modal-msg" class="text-sm text-gray-500">
+                    This is a message
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <button type="button" class="btn-ok mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+          Ok
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
