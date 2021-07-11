@@ -445,7 +445,7 @@ fetch("https://api.coingecko.com/api/v3/exchanges")
   })
   .then(function (data) {
     for (var i = 0; i < 3; i++) {
-      var exchangeCard = `<div id="exchane-card" class="lg:ml-3 border-1 xl:mr-4 xl:w-full shadow px-2 rounded m-4">
+      var exchangeCard = `<div id="exchane-card" class="lg:mr-3  border-1 xl:mr-4 xl:w-full shadow px-2 rounded m-4">
       <img class="pt-1" id="exchange-logo" src="${data[i].image}" alt="exchange iamge">
       <span class="flex">
         <p class="font-semibold pr-1 font-serif">Name:</p>
