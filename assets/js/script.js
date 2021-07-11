@@ -451,3 +451,47 @@ btnOKEl.addEventListener("click", function(){
 
 });
 
+
+var exchNameEl = document.getElementById("exch-name")
+var locationEl = document.getElementById("location")
+var scoreEl = document.getElementById("score")
+var rankingEl = document.getElementById("ranking")
+var dateEstEl = document.getElementById("date-est")
+var exchLogoEl =document.getElementById("exchange-logo")
+var exchangeHolderEl = document.getElementById("exchange-holder")
+
+fetch("https://api.coingecko.com/api/v3/exchanges")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(data[0])
+    for (var i = 0; i < 4; i++) {
+      var exchangeCard = `<div id="exchane-card" class="lg:ml-3 border-1 xl:mr-4 xl:w-full shadow px-2 rounded mb-4">
+      <img class="pt-1" id="exchange-logo" src="${data[i].image}" alt="exchange iamge">
+      <span class="flex">
+        <p class="font-semibold pr-2 font-serif">Name:</p>
+        <p id="exch-name">${data[i].name}</p>
+      </span>
+      <span class="flex">
+        <p class="font-semibold pr-2 font-serif">Location:</p>
+        <p id="location">${data[i].country}</p>
+      </span>
+      <span class="flex">
+        <p class="font-semibold pr-2 font-serif">Trust Score:</p>
+        <p id="score">${data[i].trust_score}</p>
+      </span>
+      <span class="flex">
+        <p class="font-semibold pr-2 font-serif">Ranking:</p>
+        <p id="ranking">#${data[i].trust_score_rank}</p>
+      </span>
+      <span class="flex">
+        <p class="font-semibold pr-2 font-serif">Established:</p>
+        <p id="date-est">${data[i].year_established}</p>
+      </span>
+    </div>`;
+    exchangeHolderEl.innerHTML += exchangeCard;
+     
+    }
+
+  })
