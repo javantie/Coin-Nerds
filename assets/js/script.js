@@ -297,7 +297,7 @@ var buildTopSection = async function (data) {
     var twitterFollowers = twitterFeedData.Data.Twitter.followers;
 
     var cryptoCard = `
-          <div class="cursor-pointer crypto-card mt-2 w-72 bg-opacity-80 shadow rounded-bl-3xl rounded-tr-3xl bg-blue-50 shadow-md flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60"
+          <div class="group hover:shadow-xl hover:border-blue-500 border-double border-4 cursor-pointer crypto-card mt-2 w-72 bg-opacity-80 shadow rounded-bl-3xl rounded-tr-3xl bg-blue-50 shadow-md flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60"
                 data-ticker=${tickerName}>
             <p class="ticker-name w-72 shadow font-semibold text-blue-600 bg-opacity-80  text-center bg-blue-200 md:w-80 rounded-tr-3xl">
                 ${tickerName}/${toSymbol}
