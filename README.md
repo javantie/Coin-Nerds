@@ -6,7 +6,7 @@ Our site provides vital information to those who would like to invest in cryptoc
 * [TailwindCSS](https://tailwindcss.com/)
 * [CryptoCompare](https://www.cryptocompare.com/coins/guides/how-to-use-our-api/)
 * [Coinpaprika](https://coinpaprika.com/api/)
-* [CoinLore](https://www.coinlore.com/cryptocurrency-data-api)
+* [Giphy](https://developers.giphy.com/)
 
 ## Screenshot
 ![image](https://user-images.githubusercontent.com/84108915/124321640-0e5e7180-db4c-11eb-8f0a-e3a5d279bacf.png)
