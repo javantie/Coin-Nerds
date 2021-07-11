@@ -131,7 +131,7 @@ var getgiphy = function (tick) {
       var num = Math.floor(Math.random() * responseData.length);
       var img = document.createElement("img");
       img.setAttribute("src", responseData[num].images.fixed_height.url);
-      img.setAttribute("class", "h-32 w-60 mr-4 rounded-tr-xl rounded-bl-xl");
+      img.setAttribute("class", "h-32 w-60 mr-4 rounded-tr-3xl rounded-bl-3xl");
       gifHolder.append(img);
     });
 };
@@ -310,7 +310,7 @@ var buildTopSection = async function (data) {
               <p class="font-normal bg-red-100 mr-3"><span class = "label mr-1  font-semibold">24-HR Price Change:</span> ${convertToPrecent(
                 change24HourPct
               )}</p>
-              <p class="font-norma bg-red-50 mr-3"><span class = "label mr-1  font-semibold">1-HR Price Change:</span> ${convertToPrecent(
+              <p class="font-normal bg-red-50 mr-3"><span class = "label mr-1  font-semibold">1-HR Price Change:</span> ${convertToPrecent(
                 changeHourPct
               )}</p>
               <p class="font-normal bg-red-100 mr-3"><span class = "label mr-1  font-semibold">Followers:</span> ${formatNumbers(
