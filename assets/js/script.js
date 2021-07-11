@@ -22,56 +22,50 @@ var SearchHistoryEl = document.getElementById("search-history");
 var searchTitleEl = document.getElementById("search-title");
 var modalMsgTitleEl = document.getElementById("modal-title");
 var modalMsgTextEl = document.getElementById("modal-msg");
-var btnOKEl = document.querySelector(".btn-ok")
-var msgModalEl = document.querySelector(".msg-modal") 
-var exchangeHolderEl = document.getElementById("exchange-holder")
+var btnOKEl = document.querySelector(".btn-ok");
+var msgModalEl = document.querySelector(".msg-modal");
+var exchangeHolderEl = document.getElementById("exchange-holder");
 var API_Base =
   "https://min-api.cryptocompare.com/data/pricemultifull?fsyms=BTC&tsyms=USD";
 var API_Key =
   "&api_key=47c595746df319744dafc11abb6db295cfe1ca9e302bec40e6c5a038f1a494da";
 
-  var displayMessageModal = function(messageTitle, messageText) {
-    modalMsgTitleEl.textContent=messageTitle;
-    modalMsgTextEl.textContent= messageText;
-    msgModalEl.classList.remove("hidden");
-    searchInput.focus();
-  }
-  
+var displayMessageModal = function (messageTitle, messageText) {
+  modalMsgTitleEl.textContent = messageTitle;
+  modalMsgTextEl.textContent = messageText;
+  msgModalEl.classList.remove("hidden");
+  searchInput.focus();
+};
+
 ///------CRYPTO-COMPARE API DATA USED TO PRESENT DATA FOR CURRENT BITCOIN INFO.-----/////
 var searchIndividualTickerSymbol = function (tSymbol) {
-  var isDefault = false
+  var isDefault = false;
 
-  if(!tSymbol){
-    tSymbol = "BTC"
+  if (!tSymbol) {
+    tSymbol = "BTC";
     isDefault = true;
   }
 
   tSymbol = tSymbol.toUpperCase();
   var apiURL = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${tSymbol}&tsyms=USD`;
-  
-
 
   fetch(apiURL + API_Key)
     .then(function (response) {
-      if(response.ok)
-        return response.json();
+      if (response.ok) return response.json();
     })
     .then(function (data) {
-    
-      var dataRespObj = data.Response
-      if(dataRespObj){
-        if( dataRespObj.toUpperCase() ==="ERROR"){
-          displayMessageModal("ERROR", data.Message)
+      var dataRespObj = data.Response;
+      if (dataRespObj) {
+        if (dataRespObj.toUpperCase() === "ERROR") {
+          displayMessageModal("ERROR", data.Message);
           return;
         }
       }
       //if a default ticker symbol is not provided save the ticker
-      if (!isDefault){
+      if (!isDefault) {
         saveSeachData(tSymbol);
       }
       var displayObj = data.DISPLAY;
-      console.log(displayObj[tSymbol].USD.IMAGEURL);
-      // console.log(tSymbol)
 
       currentPriceEl.textContent = displayObj[tSymbol].USD.PRICE;
       marketCapEl.textContent = displayObj[tSymbol].USD.MKTCAP;
@@ -115,11 +109,11 @@ var searchIndividualTickerSymbol = function (tSymbol) {
         return;
       }
     })
-    .catch(function(error){
-       var title = "Whoops!"
-       var msg = "Unable to connect to CryptoCompareAPI to complete you search"
-       displayMessageModal(title, msg)
-    })
+    .catch(function (error) {
+      var title = "Whoops!";
+      var msg = "Unable to connect to CryptoCompareAPI to complete you search";
+      displayMessageModal(title, msg);
+    });
 };
 var getgiphy = function (tick) {
   fetch(
@@ -128,7 +122,7 @@ var getgiphy = function (tick) {
       "&api_key=s5QeHwd3F0ZSScsfU69FCbZv9Untc0mC"
   )
     .then(function (response) {
-      if(response.ok){
+      if (response.ok) {
         return response.json();
       }
     })
@@ -136,7 +130,6 @@ var getgiphy = function (tick) {
       var responseData = response.data;
       var num = Math.floor(Math.random() * responseData.length);
       var img = document.createElement("img");
-      console.log(num, response.data)
       img.setAttribute("src", responseData[num].images.fixed_height.url);
       img.setAttribute("class", "h-32 w-60 mr-4 rounded-tr-xl rounded-bl-xl");
       gifHolder.append(img);
@@ -208,17 +201,16 @@ var fetchTwitterFeedNewsData = function () {
 
   fetch(coinPaprikaURL)
     .then(function (response) {
-      if(response.ok) {
-       return response.json();
+      if (response.ok) {
+        return response.json();
       }
     })
     .then(function (data) {
-     buildBtcTwitterFeedSection(data);
+      buildBtcTwitterFeedSection(data);
     })
-    .catch(function(error){
+    .catch(function (error) {
       btnTwitterFeedHeadEl.classList.add("hidden");
-
-    })
+    });
 };
 
 /************************************************************************
@@ -287,7 +279,7 @@ var formatNumbers = function (num) {
 var buildTopSection = async function (data) {
   var dataArray = data.Data;
 
-  if(!dataArray){
+  if (!dataArray) {
     return;
   }
 
@@ -328,19 +320,18 @@ var buildTopSection = async function (data) {
          </div>
         `;
     top5ContainerEl.innerHTML += cryptoCard;
-    
+
     if (index >= 3) break;
   }
-   var cryptoCards = document.querySelectorAll(".crypto-card")
-   for(var i=0; i<cryptoCards.length; i++){
-     cryptoCards[i].addEventListener("click", function(event){
-       var clickedSymbol = this.getAttribute("data-ticker").trim();
-       searchIndividualTickerSymbol(clickedSymbol);
-       gifHolder.innerHTML = "";
-       getgiphy(clickedSymbol);
-     })
-   }
-  
+  var cryptoCards = document.querySelectorAll(".crypto-card");
+  for (var i = 0; i < cryptoCards.length; i++) {
+    cryptoCards[i].addEventListener("click", function (event) {
+      var clickedSymbol = this.getAttribute("data-ticker").trim();
+      searchIndividualTickerSymbol(clickedSymbol);
+      gifHolder.innerHTML = "";
+      getgiphy(clickedSymbol);
+    });
+  }
 };
 
 /************************************************************************
@@ -359,14 +350,14 @@ var fetchCryptoCompareTopList = function () {
 
   fetch(apiURL)
     .then(function (response) {
-      if(response.ok){
+      if (response.ok) {
         return response.json();
       }
     })
     .then(function (data) {
       buildTopSection(data);
     })
-    .catch(function(error) {
+    .catch(function (error) {
       return;
     });
 };
@@ -387,13 +378,13 @@ loadPage();
 ////////-----------EVENT LSITENER FOR SEARCH BTN----------///////////
 searchButtonEl.addEventListener("click", function (event) {
   var tick = searchInput.value;
-  searchInput.value=""
+  searchInput.value = "";
   event.preventDefault();
   if (tick === "") {
-    var msgTitle = "Input Required!"
-    var msg = "Please input a valid ticker symbol to search!"
-    
-    displayMessageModal(msgTitle, msg)
+    var msgTitle = "Input Required!";
+    var msg = "Please input a valid ticker symbol to search!";
+
+    displayMessageModal(msgTitle, msg);
     return;
   } else {
     searchIndividualTickerSymbol(tick);
@@ -419,7 +410,6 @@ var saveSeachData = function (tick) {
 //Load data from local storage
 var loadData = function () {
   oldData = JSON.parse(localStorage.getItem("search")) || [];
-  //console.log(oldData);
   counter = oldData.length;
   for (let i = 0; i < oldData.length; i++) {
     search = document.createElement("p");
@@ -431,34 +421,29 @@ var loadData = function () {
     SearchHistoryEl.append(search);
 
     search.addEventListener("click", function () {
-      tSymbol = this.textContent
+      tSymbol = this.textContent;
       tSymbol = tSymbol.toUpperCase();
       searchIndividualTickerSymbol(tSymbol);
       gifHolder.innerHTML = "";
       getgiphy(tSymbol);
-      console.log(this.textContent);
-  });
+    });
   }
 };
 loadData();
-
 
 clearBtnEl.addEventListener("click", function () {
   localStorage.clear();
 });
 
-btnOKEl.addEventListener("click", function(){
-      msgModalEl.classList.add("hidden");
-
+btnOKEl.addEventListener("click", function () {
+  msgModalEl.classList.add("hidden");
 });
-
 
 fetch("https://api.coingecko.com/api/v3/exchanges")
   .then(function (response) {
     return response.json();
   })
   .then(function (data) {
-    console.log(data[0])
     for (var i = 0; i < 3; i++) {
       var exchangeCard = `<div id="exchane-card" class="lg:ml-3 border-1 xl:mr-4 xl:w-full shadow px-2 rounded mb-4">
       <img class="pt-1" id="exchange-logo" src="${data[i].image}" alt="exchange iamge">
@@ -484,8 +469,6 @@ fetch("https://api.coingecko.com/api/v3/exchanges")
       </span>
       <a target="blank" href="${data[i].url}"><p class="text-blue-700 pt-4 font-semibold">Click Here</p></a>
     </div>`;
-    exchangeHolderEl.innerHTML += exchangeCard;
-     
+      exchangeHolderEl.innerHTML += exchangeCard;
     }
-
-  })
+  });
