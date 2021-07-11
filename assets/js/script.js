@@ -304,7 +304,8 @@ var buildTopSection = async function (data) {
     var twitterFollowers = twitterFeedData.Data.Twitter.followers;
 
     var cryptoCard = `
-          <div class="crypto-card mt-2 w-72 shadow rounded bg-blue-50 shadow-md rounded-bl-xl flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60">
+          <div class="crypto-card mt-2 w-72 shadow rounded bg-blue-50 shadow-md rounded-bl-xl flex flex-wrap sm:flex sm:flex-wrap sm:mr-4 sm:mt-2 md:mt-4 md:w-80 lg:w-60"
+                data-ticker=${tickerName}>
             <p class="ticker-name w-72 shadow font-semibold text-blue-600 text-center bg-blue-200 rounded-tr-xl md:w-80">
                 ${tickerName}/${toSymbol}
             </p>
@@ -326,8 +327,19 @@ var buildTopSection = async function (data) {
          </div>
         `;
     top5ContainerEl.innerHTML += cryptoCard;
+    
     if (index >= 3) break;
   }
+   var cryptoCards = document.querySelectorAll(".crypto-card")
+   for(var i=0; i<cryptoCards.length; i++){
+     cryptoCards[i].addEventListener("click", function(event){
+       var clickedSymbol = this.getAttribute("data-ticker").trim();
+       searchIndividualTickerSymbol(clickedSymbol);
+       gifHolder.innerHTML = "";
+       getgiphy(clickedSymbol);
+     })
+   }
+  
 };
 
 /************************************************************************
